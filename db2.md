@@ -209,16 +209,17 @@ Solution to remove the hanged 'running' tasks from the Scheduler:
 2. Stop the DAS.
 
 3. Run these commands:
-    db2 connect to TOOLSDB
-    db2 delete from SYSTOOLS.MDTASKEXECTY00 where taskID=XXX
+    `db2 connect to TOOLSDB`
+    `db2 delete from SYSTOOLS.MDTASKEXECTY00 where taskID=XXX`
 
 4. Restart DAS and the Scheduler to check if the 'running' jobs are removed. If not, proceed to step 5.
 
 5. Make sure DAS is stopped again.
 
 6. Issue these commands:
-    db2 connect to TOOLSDB
-    db2 update SYSTOOLS.MDTASKTYPE00 set NUMBEROFEXECUTIONS00=0
-    db2 update SYSTOOLS.MDTASKTYPE00 set STATE00='0'
+
+    `db2 connect to TOOLSDB`
+    `db2 update SYSTOOLS.MDTASKTYPE00 set NUMBEROFEXECUTIONS00=0`
+    `db2 update SYSTOOLS.MDTASKTYPE00 set STATE00='0'`
 
 7. Restart DAS and the Scheduler. The 'running' tasks should be removed.
