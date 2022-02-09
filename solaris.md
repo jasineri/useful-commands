@@ -1,5 +1,6 @@
 # OS Version
-    oslevel + uname -a
+    uname -a
+    oslevel
     isainfo -v
     more /etc/release
 
