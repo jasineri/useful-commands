@@ -1,4 +1,6 @@
-# OS Version
+# Sun Solaris commands
+
+## OS Version
     uname -a
     oslevel
     isainfo -v
