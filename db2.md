@@ -199,3 +199,26 @@
     export to <Filename>.ixf of ixf select * from <Tablename>;
     load from <Filename>.ixf of ixf replace into <Tablename> nonrecoverable;
 
+## Scheduled tasks appear as running in the Scheduler even though they have completed
+When DAS is brought down while a scheduled task is running, the status of the task might stay in 'running' state even though the job has already finished or was aborted.
+
+Solution to remove the hanged 'running' tasks from the Scheduler:
+
+1. Locate the 'running' record(s) by getting the corresponding task ID, which can be obtained from the Task Center.
+
+2. Stop the DAS.
+
+3. Run these commands:
+    db2 connect to TOOLSDB
+    db2 delete from SYSTOOLS.MDTASKEXECTY00 where taskID=XXX
+
+4. Restart DAS and the Scheduler to check if the 'running' jobs are removed. If not, proceed to step 5.
+
+5. Make sure DAS is stopped again.
+
+6. Issue these commands:
+    db2 connect to TOOLSDB
+    db2 update SYSTOOLS.MDTASKTYPE00 set NUMBEROFEXECUTIONS00=0
+    db2 update SYSTOOLS.MDTASKTYPE00 set STATE00='0'
+
+7. Restart DAS and the Scheduler. The 'running' tasks should be removed.
