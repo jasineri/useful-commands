@@ -1,4 +1,6 @@
-# OS Version
+# Linux commands
+
+## OS Version
     uname -srm
     cat /proc/version
     hostnamectl
@@ -12,15 +14,15 @@
 ## Convert file's encoding
     iconv -f UTF-8 -t CP1252 <in_file> > <out_file>
 
-# Linux Performance Monitoring
+## Linux Performance Monitoring
     vmstat
     iostat
 
-# Information about the Linux networking
+## Information about the Linux networking
     netstat -a -n
 
-# Monitor processes
+## Monitor processes
     top
 
-# List processes
+## List processes
     ps -ef
