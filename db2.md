@@ -115,7 +115,7 @@
     db2 update db cfg for <Database> USING LOGSECOND 100
 
 ## Check status
-    SYSCAT.TABLES (Columns STATUS: C -> ``Check Pending'')
+    SYSCAT.TABLES (Columns STATUS: C -> 'Check Pending')
 
 ## Replication trace
     tail /home/db2admin/utilogs/STUDY.TRC|grep -i UP1SYT
