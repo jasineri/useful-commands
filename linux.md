@@ -55,6 +55,7 @@
 
 `${varname%%pattern}` If pattern matches the end of varname's value, delete the longest part that mathes and return the rest.
 
+## expr command
 Use the command `expr index string string2` to display the numerical position in `string` of first character in `string2` that matches.
 
 The command `expr substr string position length` extracts `length` characters of substring from `string` starting at `position`.
