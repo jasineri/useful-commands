@@ -102,3 +102,11 @@
 
 ## Display the version of BIND
     nslookup -class=chaos -q=txt version.bind ns0.optix.org
+
+## Shutdown server
+    # umount /<mountings>
+    # /opt/SUNWsscs/sscsconsole/sbin/sccli
+    sccli> selected device /dev/rdsk/<device>
+    sccli> shutdown controller
+    sccli> exit
+    # init 0
