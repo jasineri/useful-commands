@@ -38,33 +38,24 @@
     command 2>&1 | tee file
 
 ## The following String Substitution Operators can be used
-Return value of varname if it exists and it is not null; otherwise return value.
-    ${varname:-value}
+`${varname:-value}` Return value of varname if it exists and it is not null; otherwise return value.
 
-Return value of varname if it exists and it is not null; otherwise set varname to value and return value.
-    ${varname:=value}
+`${varname:=value}` Return value of varname if it exists and it is not null; otherwise set varname to value and return value.
 
-Return value of varname if it exists and it is not null; otherwise print varname: message and abort current command or script. Default message is parameter null or not set.
-    ${varname:?message}
+`${varname:?message}` Return value of varname if it exists and it is not null; otherwise print varname: message and abort current command or script. Default message is parameter null or not set.
 
-Return value, if varname exists and it is not null; otherwise return null.
-    ${varname:+value}
+`${varname:+value}` Return value, if varname exists and it is not null; otherwise return null.
 
 ## The following Pattern-matching Operators can be used:
-If pattern matches the beginning of varname's value, delete the shortest part that mathes and return the rest.
-    ${varname#pattern}
+`${varname#pattern}` If pattern matches the beginning of varname's value, delete the shortest part that mathes and return the rest.
 
-If pattern matches the beginning of varname's value, delete the longest part that mathes and return the rest.
-    ${varname##pattern}
+`${varname##pattern}` If pattern matches the beginning of varname's value, delete the longest part that mathes and return the rest.
 
-If pattern matches the end of varname's value, delete the shortest part that mathes and return the rest.
-    ${varname%pattern}
+`${varname%pattern}` If pattern matches the end of varname's value, delete the shortest part that mathes and return the rest.
 
-If pattern matches the end of varname's value, delete the longest part that mathes and return the rest.
-    ${varname%%pattern}
+`${varname%%pattern}` If pattern matches the end of varname's value, delete the longest part that mathes and return the rest.
 
-## Use the command to display the numerical position in string of first character in string2 that matches.
-    expr index string string2
+Use the command `expr index string string2` to display the numerical position in `string` of first character in `string2` that matches.
 
-## The command extracts length characters of substring from string starting at position.
-    expr substr string position length
+The command `expr substr string position length` extracts `length` characters of substring from `string` starting at `position`.
+
