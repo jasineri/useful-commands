@@ -1,9 +1,11 @@
-# DB2 version
+# DB2 commands
+
+## DB2 version
     db2level
     db2licm -l
     pkginfo -l db2cliv71
 
-# Generate support request
+## Generate support request
     db2support . -g -s
 
 ## Verify the table pd for corruption:
@@ -23,45 +25,45 @@
 ## Lock table in exclusive mode
     LOCK TABLE "<Table>" IN EXCLUSIVE MODE
 
-# Get DB2 task run history
+## Get DB2 task run history
     select * from "TOOLSCAT"."MDTHISTORYTY00"
     where START00 > '2009-02-04 00:00:00.0000'
     and taskname00='<Taskname>'
 
-# DB2 Administration Server Command
+## DB2 Administration Server Command
     # su - <dasusr>
     $ db2admin stop
     $ db2admin start
 
-#Configure Replication Monitor
+## Configure Replication Monitor
     asnpwd encrypt all
     asnpwd add alias <Database> id db2admin password xyxyxyxyxxyyx
     asnpwd add alias <Database> id db2admin password xyxyxyxyxxyyx
 
-# Database size
+## Database size
     db2 "CALL GET_DBSIZE_INFO(?, ?, ?, 0)"
 
-# Restore tablespace
+## Restore tablespace
     db2 update db cfg using LOGRETAIN ON
     db2stop force
     db2start
     db2 "restore db <Database> TABLESPACE (TS_REFERENCE) from /<path_to_backup> TAKEN AT 20071029094805"
 
-# Check backup / restore status
+## Check backup / restore status
     db2 list utilities show detail
 
-# Restore progress
+## Restore progress
     db2 list utilities show detail
     db2 rollforward database <Database> query status
 
-# Show information
+## Show information
     db2pd -db <Database>
     db2pd -db <Database> -tablespaces
 
-# Archive db2log
+## Archive db2log
     db2diag -A
 
-# DB2 backup / restore
+## DB2 backup / restore
     db2 backup db <Database> online to /<path_to_backup> include logs
     db2 restore db <Database> from /<path_to_backup> TAKEN AT 20070126174124 INTO <Database> logtarget /<path_to_backup> REPLACE EXISTING
     db2 "rollforward db <Database> to end of logs and stop OVERFLOW LOG PATH (/<path_to_backup>)"
@@ -70,14 +72,14 @@
     db2 restore db <Database> from /<path_to_backup> taken at 20060706143513 into <Database> WITHOUT PROMPTING
     db2 rollforward db <Database> to end of logs and complete
 
-# Remove carriage returns
+## Remove carriage returns
     replace(COP_MESSAGE,x'26','')
 
-# Date transformation
+## Date transformation
     DATE(TRANSLATE('EF/GH/ABCD',substr(PRMYYYYMM,2)||'01','ABCDEFGH'))
 
 
-# Replication. Force a full refresh by resetting the LASTSUCCESS, SYNCHTIME, and SYNCHPOINT values in subscription set table to null.
+## Replication. Force a full refresh by resetting the LASTSUCCESS, SYNCHTIME, and SYNCHPOINT values in subscription set table to null.
     -- on source database
     update ASN.IBMSNAP_PRUNCNTL
     set SYNCHTIME = null, SYNCHPOINT = null
@@ -90,7 +92,7 @@
     SynchTime = NULL
     WHERE set_name = 'STY';
 
-# Find table's columns
+## Find table's columns
      SELECT C.TABSCHEMA, C.TABNAME,
             C.COLNAME
         FROM SYSCAT.TABLES AS T,
@@ -101,99 +103,99 @@
         AND C.TABSCHEMA = T.TABSCHEMA
         AND C.TABNAME = T.TABNAME
 
-# Update allocation parameters + monitor
+## Update allocation parameters + monitor
     db2 update dbm cfg using DFT_MON_SORT off DFT_MON_STMT off DFT_MON_BUFPOOL off
     db2 update db cfg for <Database> using sortheap 1024
 
-# Get DB config
+## Get DB config
     db2 get db cfg for <Database>
 
-# Update log file size
+## Update log file size
     db2 update db cfg for <Database> USING LOGFILSIZ 40000
     db2 update db cfg for <Database> USING LOGSECOND 100
 
-# Check status
+## Check status
     SYSCAT.TABLES (Columns STATUS: C -> ``Check Pending'')
 
-# Replication trace
+## Replication trace
     tail /home/db2admin/utilogs/STUDY.TRC|grep -i UP1SYT
 
-# Checks the status of a load operation
+## Checks the status of a load operation
     db2 load query
 
-# Restart database, force kill all connections!
+## Restart database, force kill all connections!
     DEACTIVATE DATABASE database-alias
 
-# List user defined Jars
+## List user defined Jars
     ls /home/db2admin/sqllib/function/jar/DB2ADMIN
 
-# Large archive
+## Large archive
     cat <archive_name>.001 | unix2dos | gzip -c > backup.gz
 
-# Capture erorrs
+## Capture erorrs
     db2 "select * from ASN.IBMSNAP_TRACE where TRACE_TIME >'2004-04-13-11.00.00.000000' order by TRACE_TIME"
 
-# Start JDBC daemons
+## Start JDBC daemons
     db2start
     db2jstrt
     db2jd <Portnumber>
 
-# Extend tablespace
+## Extend tablespace
     db2 "alter TABLESPACE <Name> EXTEND (FILE '/<path_to_file>.dbm' 6G)"
 
-# Find db2 processes
+## Find db2 processes
     ps -ef|grep db2|grep -v db2sysc|grep -v db2jd|grep -v bash
 
-# Get backup pending databases
+## Get backup pending databases
     db2 "get db cfg for <Database>" | grep -i "BACKUP PENDING"
 
-# List tablespaces
+## List tablespaces
     db2 list tablespaces show detail
 
-# Monitor instances
+## Monitor instances
     while (db2list) do sleep 10; date; done
 
-# Get snapshot for application
+## Get snapshot for application
     db2 "GET SNAPSHOT FOR APPLICATION AGENTID <Nr>"|grep "Rows updated"
 
-# Get Db2 diagnostic log 
+## Get Db2 diagnostic log 
     tail /home/db2admin/sqllib/db2dump/db2diag.log
 
-# List applications
+## List applications
     db2 "list applications show detail"
 
-# Get snapshot for application
+## Get snapshot for application
     db2 "GET SNAPSHOT FOR APPLICATION AGENTID (Appl. Handle)"
 
-# Explain plan for ...(select statement)
+## Explain plan for ...(select statement)
     db2exfmt -> <Database>
 
-# Force application
+## Force application
     db2 "force application (Appl. Handle)"
 
-# Generate DDL
+## Generate DDL
     db2look -d <Database> -e -l -x -f -a -o db2look.sql
     db2look -d <Database> -t <Tablespace> -o dap.txt -e
     db2look -d <Database> -o dap.txt -e
 
-# List tables
+## List tables
     db2 "select tbspace,index_tbspace from sysibm.systables where lower(NAME) like '...'"
 
-# List indexes
+## List indexes
     db2 "select * from sysibm.sysindexes where lower(TBNAME) like '...'"
 
-# Invalid / inoperative views:
+## Invalid / inoperative views:
     db2 "select name from sysibm.sysviews where valid='X'"
     select text||';' from sysibm.sysviews where valid='X';
 
-# Drop database
+## Drop database
     db2 connect reset
     db2 drop database <Database>
 
-# parameter commit
+## parameter commit
     db2 parameter commit-
 
-# Export / import data
+## Export / import data
     export to <Filename>.ixf of ixf select * from <Tablename>;
     load from <Filename>.ixf of ixf replace into <Tablename> nonrecoverable;
 
