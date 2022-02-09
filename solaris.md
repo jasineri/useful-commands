@@ -1,3 +1,8 @@
+# OS Version
+    oslevel + uname -a
+    isainfo -v
+    more /etc/release
+
 ## Restart sendmail
     # /etc/init.d/sendmail stop
     # /etc/init.d/sendmail start
