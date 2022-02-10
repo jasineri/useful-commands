@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+		<title>db2</title>
+		<style>
+			/* PDF Specific */
+
+@media print {
+  body {
+    min-width: initial;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+}
+
+/* General */
+
+.octicon {
+  display: inline-block;
+  fill: currentColor;
+  vertical-align: text-bottom;
+}
+
+.anchor {
+  float: left;
+  line-height: 1;
+  margin-left: -20px;
+  padding-right: 4px;
+}
+
+.anchor:focus {
+  outline: none;
+}
+
+h1 .octicon-link,
+h2 .octicon-link,
+h3 .octicon-link,
+h4 .octicon-link,
+h5 .octicon-link,
+h6 .octicon-link {
+  color: #1b1f23;
+  vertical-align: middle;
+  visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+  text-decoration: none;
+}
+
+h1:hover .anchor .octicon-link,
+h2:hover .anchor .octicon-link,
+h3:hover .anchor .octicon-link,
+h4:hover .anchor .octicon-link,
+h5:hover .anchor .octicon-link,
+h6:hover .anchor .octicon-link {
+  visibility: visible;
+}
+
+h1:hover .anchor .octicon-link:before,
+h2:hover .anchor .octicon-link:before,
+h3:hover .anchor .octicon-link:before,
+h4:hover .anchor .octicon-link:before,
+h5:hover .anchor .octicon-link:before,
+h6:hover .anchor .octicon-link:before {
+  width: 16px;
+  height: 16px;
+  content: ' ';
+  display: inline-block;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' width='16' height='16' aria-hidden='true'%3E%3Cpath fill-rule='evenodd' d='M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+body {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-print-color-adjust: exact;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #24292e;
+  word-wrap: break-word;
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 1rem auto;
+}
+
+details {
+  display: block;
+}
+
+summary {
+  display: list-item;
+}
+
+a {
+  background-color: initial;
+}
+
+a:active,
+a:hover {
+  outline-width: 0;
+}
+
+strong {
+  font-weight: inherit;
+  font-weight: bolder;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+img {
+  border-style: none;
+}
+
+code,
+kbd,
+pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+hr {
+  box-sizing: initial;
+  height: 0;
+  overflow: visible;
+}
+
+input {
+  font: inherit;
+  margin: 0;
+}
+
+input {
+  overflow: visible;
+}
+
+[type='checkbox'] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+strong {
+  font-weight: 600;
+}
+
+hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #dfe2e5;
+}
+
+hr:after,
+hr:before {
+  display: table;
+  content: '';
+}
+
+hr:after {
+  clear: both;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+details summary {
+  cursor: pointer;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font: 11px SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  line-height: 10px;
+  color: #444d56;
+  vertical-align: middle;
+  background-color: #fafbfc;
+  border: 1px solid #d1d5da;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #d1d5da;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h1,
+h2 {
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+h3,
+h4 {
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h5,
+h6 {
+  font-weight: 600;
+}
+
+h6 {
+  font-size: 12px;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+blockquote {
+  margin: 0;
+}
+
+ol,
+ul {
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+ol ol,
+ul ol {
+  list-style-type: lower-roman;
+}
+
+ol ol ol,
+ol ul ol,
+ul ol ol,
+ul ul ol {
+  list-style-type: lower-alpha;
+}
+
+dd {
+  margin-left: 0;
+}
+
+code,
+pre {
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-size: 12px;
+}
+
+pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+:checked + .radio-label {
+  position: relative;
+  z-index: 1;
+  border-color: #0366d6;
+}
+
+.border {
+  border: 1px solid #e1e4e8 !important;
+}
+
+.border-0 {
+  border: 0 !important;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #e1e4e8 !important;
+}
+
+.rounded-1 {
+  border-radius: 3px !important;
+}
+
+.bg-white {
+  background-color: #fff !important;
+}
+
+.bg-gray-light {
+  background-color: #fafbfc !important;
+}
+
+.text-gray-light {
+  color: #6a737d !important;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.my-2 {
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+
+.pl-0 {
+  padding-left: 0 !important;
+}
+
+.py-0 {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.pl-1 {
+  padding-left: 4px !important;
+}
+
+.pl-2 {
+  padding-left: 8px !important;
+}
+
+.py-2 {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+.pl-3,
+.px-3 {
+  padding-left: 16px !important;
+}
+
+.px-3 {
+  padding-right: 16px !important;
+}
+
+.pl-4 {
+  padding-left: 24px !important;
+}
+
+.pl-5 {
+  padding-left: 32px !important;
+}
+
+.pl-6 {
+  padding-left: 40px !important;
+}
+
+.f6 {
+  font-size: 12px !important;
+}
+
+.lh-condensed {
+  line-height: 1.25 !important;
+}
+
+.text-bold {
+  font-weight: 600 !important;
+}
+
+.pl-c {
+  color: #6a737d;
+}
+
+.pl-c1,
+.pl-s .pl-v {
+  color: #005cc5;
+}
+
+.pl-e,
+.pl-en {
+  color: #6f42c1;
+}
+
+.pl-s .pl-s1,
+.pl-smi {
+  color: #24292e;
+}
+
+.pl-ent {
+  color: #22863a;
+}
+
+.pl-k {
+  color: #d73a49;
+}
+
+.pl-pds,
+.pl-s,
+.pl-s .pl-pse .pl-s1,
+.pl-sr,
+.pl-sr .pl-cce,
+.pl-sr .pl-sra,
+.pl-sr .pl-sre {
+  color: #032f62;
+}
+
+.pl-smw,
+.pl-v {
+  color: #e36209;
+}
+
+.pl-bu {
+  color: #b31d28;
+}
+
+.pl-ii {
+  color: #fafbfc;
+  background-color: #b31d28;
+}
+
+.pl-c2 {
+  color: #fafbfc;
+  background-color: #d73a49;
+}
+
+.pl-c2:before {
+  content: '^M';
+}
+
+.pl-sr .pl-cce {
+  font-weight: 700;
+  color: #22863a;
+}
+
+.pl-ml {
+  color: #735c0f;
+}
+
+.pl-mh,
+.pl-mh .pl-en,
+.pl-ms {
+  font-weight: 700;
+  color: #005cc5;
+}
+
+.pl-mi {
+  font-style: italic;
+  color: #24292e;
+}
+
+.pl-mb {
+  font-weight: 700;
+  color: #24292e;
+}
+
+.pl-md {
+  color: #b31d28;
+  background-color: #ffeef0;
+}
+
+.pl-mi1 {
+  color: #22863a;
+  background-color: #f0fff4;
+}
+
+.pl-mc {
+  color: #e36209;
+  background-color: #ffebda;
+}
+
+.pl-mi2 {
+  color: #f6f8fa;
+  background-color: #005cc5;
+}
+
+.pl-mdr {
+  font-weight: 700;
+  color: #6f42c1;
+}
+
+.pl-ba {
+  color: #586069;
+}
+
+.pl-sg {
+  color: #959da5;
+}
+
+.pl-corl {
+  text-decoration: underline;
+  color: #032f62;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.my-2 {
+  margin-bottom: 8px !important;
+}
+
+.my-2 {
+  margin-top: 8px !important;
+}
+
+.pl-0 {
+  padding-left: 0 !important;
+}
+
+.py-0 {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.pl-1 {
+  padding-left: 4px !important;
+}
+
+.pl-2 {
+  padding-left: 8px !important;
+}
+
+.py-2 {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+.pl-3 {
+  padding-left: 16px !important;
+}
+
+.pl-4 {
+  padding-left: 24px !important;
+}
+
+.pl-5 {
+  padding-left: 32px !important;
+}
+
+.pl-6 {
+  padding-left: 40px !important;
+}
+
+.pl-7 {
+  padding-left: 48px !important;
+}
+
+.pl-8 {
+  padding-left: 64px !important;
+}
+
+.pl-9 {
+  padding-left: 80px !important;
+}
+
+.pl-10 {
+  padding-left: 96px !important;
+}
+
+.pl-11 {
+  padding-left: 112px !important;
+}
+
+.pl-12 {
+  padding-left: 128px !important;
+}
+
+hr {
+  border-bottom-color: #eee;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font: 11px SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  line-height: 10px;
+  color: #444d56;
+  vertical-align: middle;
+  background-color: #fafbfc;
+  border: 1px solid #d1d5da;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #d1d5da;
+}
+
+body:after,
+body:before {
+  display: table;
+  content: '';
+}
+
+body:after {
+  clear: both;
+}
+
+body > :first-child {
+  margin-top: 0 !important;
+}
+
+body > :last-child {
+  margin-bottom: 0 !important;
+}
+
+a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+
+blockquote,
+details,
+dl,
+ol,
+p,
+pre,
+table,
+ul {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+hr {
+  height: 0.25em;
+  padding: 0;
+  margin: 24px 0;
+  background-color: #e1e4e8;
+  border: 0;
+}
+
+blockquote {
+  padding: 0 1em;
+  color: #6a737d;
+  border-left: 0.25em solid #dfe2e5;
+}
+
+blockquote > :first-child {
+  margin-top: 0;
+}
+
+blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h1,
+h2 {
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #eaecef;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.25em;
+}
+
+h4 {
+  font-size: 1em;
+}
+
+h5 {
+  font-size: 0.875em;
+}
+
+h6 {
+  font-size: 0.85em;
+  color: #6a737d;
+}
+
+ol,
+ul {
+  padding-left: 2em;
+}
+
+ol ol,
+ol ul,
+ul ol,
+ul ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+li {
+  word-wrap: break-all;
+}
+
+li > p {
+  margin-top: 16px;
+}
+
+li + li {
+  margin-top: 0.25em;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: 600;
+}
+
+dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+}
+
+table th {
+  font-weight: 600;
+}
+
+table td,
+table th {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+table tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+img {
+  max-width: 80%;
+  box-sizing: initial;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fff;
+}
+
+code {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(27, 31, 35, 0.05);
+  border-radius: 3px;
+}
+
+pre {
+  word-wrap: normal;
+}
+
+pre > code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #333;
+  -webkit-print-color-adjust: exact;
+  background: #f8f8f8;
+}
+
+.hljs pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.hljs pre,
+pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f6f8fa;
+  -webkit-print-color-adjust: exact;
+
+  border-radius: 3px;
+}
+
+pre code {
+  display: inline;
+  max-width: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: initial;
+  border: 0;
+}
+
+.commit-tease-sha {
+  display: inline-block;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-size: 90%;
+  color: #444d56;
+}
+
+.full-commit .btn-outline:not(:disabled):hover {
+  color: #005cc5;
+  border-color: #005cc5;
+}
+
+.blob-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.blob-wrapper-embedded {
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.blob-num {
+  width: 1%;
+  min-width: 50px;
+  padding-right: 10px;
+  padding-left: 10px;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-size: 12px;
+  line-height: 20px;
+  color: rgba(27, 31, 35, 0.3);
+  text-align: right;
+  white-space: nowrap;
+  vertical-align: top;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.blob-num:hover {
+  color: rgba(27, 31, 35, 0.6);
+}
+
+.blob-num:before {
+  content: attr(data-line-number);
+}
+
+.blob-code {
+  position: relative;
+  padding-right: 10px;
+  padding-left: 10px;
+  line-height: 20px;
+  vertical-align: top;
+}
+
+.blob-code-inner {
+  overflow: visible;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-size: 12px;
+  color: #24292e;
+  word-wrap: normal;
+  white-space: pre;
+}
+
+.pl-token.active,
+.pl-token:hover {
+  cursor: pointer;
+  background: #ffea7f;
+}
+
+.tab-size[data-tab-size='1'] {
+  -moz-tab-size: 1;
+  tab-size: 1;
+}
+
+.tab-size[data-tab-size='2'] {
+  -moz-tab-size: 2;
+  tab-size: 2;
+}
+
+.tab-size[data-tab-size='3'] {
+  -moz-tab-size: 3;
+  tab-size: 3;
+}
+
+.tab-size[data-tab-size='4'] {
+  -moz-tab-size: 4;
+  tab-size: 4;
+}
+
+.tab-size[data-tab-size='5'] {
+  -moz-tab-size: 5;
+  tab-size: 5;
+}
+
+.tab-size[data-tab-size='6'] {
+  -moz-tab-size: 6;
+  tab-size: 6;
+}
+
+.tab-size[data-tab-size='7'] {
+  -moz-tab-size: 7;
+  tab-size: 7;
+}
+
+.tab-size[data-tab-size='8'] {
+  -moz-tab-size: 8;
+  tab-size: 8;
+}
+
+.tab-size[data-tab-size='9'] {
+  -moz-tab-size: 9;
+  tab-size: 9;
+}
+
+.tab-size[data-tab-size='10'] {
+  -moz-tab-size: 10;
+  tab-size: 10;
+}
+
+.tab-size[data-tab-size='11'] {
+  -moz-tab-size: 11;
+  tab-size: 11;
+}
+
+.tab-size[data-tab-size='12'] {
+  -moz-tab-size: 12;
+  tab-size: 12;
+}
+
+.task-list-item {
+  list-style-type: none;
+}
+
+.task-list-item + .task-list-item {
+  margin-top: 3px;
+}
+
+.task-list-item input {
+  margin: 0 0.2em 0.25em -1.6em;
+  vertical-align: middle;
+}
+/*
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+*/
+  
+  .hljs-comment,
+  .hljs-quote {
+    color: #998;
+    font-style: italic;
+  }
+  
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-subst {
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .hljs-number,
+  .hljs-literal,
+  .hljs-variable,
+  .hljs-template-variable,
+  .hljs-tag .hljs-attr {
+    color: #008080;
+  }
+  
+  .hljs-string,
+  .hljs-doctag {
+    color: #d14;
+  }
+  
+  .hljs-title,
+  .hljs-section,
+  .hljs-selector-id {
+    color: #900;
+    font-weight: bold;
+  }
+  
+  .hljs-subst {
+    font-weight: normal;
+  }
+  
+  .hljs-type,
+  .hljs-class .hljs-title {
+    color: #458;
+    font-weight: bold;
+  }
+  
+  .hljs-tag,
+  .hljs-name,
+  .hljs-attribute {
+    color: #000080;
+    font-weight: normal;
+  }
+  
+  .hljs-regexp,
+  .hljs-link {
+    color: #009926;
+  }
+  
+  .hljs-symbol,
+  .hljs-bullet {
+    color: #990073;
+  }
+  
+  .hljs-built_in,
+  .hljs-builtin-name {
+    color: #0086b3;
+  }
+  
+  .hljs-meta {
+    color: #999;
+    font-weight: bold;
+  }
+  
+  .hljs-deletion {
+    background: #fdd;
+  }
+  
+  .hljs-addition {
+    background: #dfd;
+  }
+  
+  .hljs-emphasis {
+    font-style: italic;
+  }
+  
+  .hljs-strong {
+    font-weight: bold;
+  }
+		</style>
+	</head>
+	<body>
+		<nav id="table-of-contents">
+			
+		</nav>
+		<main>
+			<h1 id="db2-commands" tabindex="-1"><a class="anchor" href="#db2-commands" aria-hidden="true"><span class="octicon octicon-link"></span></a> DB2 commands</h1>
+<h2 id="db2-version" tabindex="-1"><a class="anchor" href="#db2-version" aria-hidden="true"><span class="octicon octicon-link"></span></a> DB2 version</h2>
+<pre><code>db2level
+db2licm -l
+pkginfo -l db2cliv71
+</code></pre>
+<h2 id="generate-support-request" tabindex="-1"><a class="anchor" href="#generate-support-request" aria-hidden="true"><span class="octicon octicon-link"></span></a> Generate support request</h2>
+<pre><code>db2support . -g -s
+</code></pre>
+<h2 id="verify-the-table-pd-for-corruption" tabindex="-1"><a class="anchor" href="#verify-the-table-pd-for-corruption" aria-hidden="true"><span class="octicon octicon-link"></span></a> Verify the table pd for corruption:</h2>
+<pre><code>db2cat -d &lt;db&gt; -n &lt;table&gt; -s &lt;schema&gt; -o db2cat0.out
+</code></pre>
+<h2 id="check-dependencies" tabindex="-1"><a class="anchor" href="#check-dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a> Check Dependencies</h2>
+<pre><code>select constname from SYSCAT.REFERENCES where TABNAME like 'TABNAME%' or REFTABNAME like 'TABNAME%';
+select viewschema,viewname from SYSCAT.VIEWDEP where BSCHEMA like 'SCHEMANAME%' and BNAME like 'TABNAME%';
+select funcschema,funcname from SYSCAT.FUNCDEP where BSCHEMA like 'SCHEMANAME%' and BNAME like 'TABNAME%';
+select constname from SYSCAT.CHECKS where TABSCHEMA like 'SCHEMANAME%' and TABNAME like 'TABNAME%';
+select constname from SYSCAT.REFERENCES where TABSCHEMA like 'SCHEMANAME%' and TABNAME like 'TABNAME%';
+select trigschema,trigname from SYSCAT.TRIGDEP where BSCHEMA like 'SCHEMANAME%' and BNAME like 'TABNAME%'; 
+</code></pre>
+<h2 id="lists-entries-in-the-history-file" tabindex="-1"><a class="anchor" href="#lists-entries-in-the-history-file" aria-hidden="true"><span class="octicon octicon-link"></span></a> Lists entries in the history file:</h2>
+<pre><code>db2 list history DROPPED TABLE ALL for &lt;Database&gt;
+</code></pre>
+<h2 id="lock-table-in-exclusive-mode" tabindex="-1"><a class="anchor" href="#lock-table-in-exclusive-mode" aria-hidden="true"><span class="octicon octicon-link"></span></a> Lock table in exclusive mode</h2>
+<pre><code>LOCK TABLE "&lt;Table&gt;" IN EXCLUSIVE MODE
+</code></pre>
+<h2 id="get-db2-task-run-history" tabindex="-1"><a class="anchor" href="#get-db2-task-run-history" aria-hidden="true"><span class="octicon octicon-link"></span></a> Get DB2 task run history</h2>
+<pre><code>select * from "TOOLSCAT"."MDTHISTORYTY00"
+where START00 &gt; '2009-02-04 00:00:00.0000'
+and taskname00='&lt;Taskname&gt;'
+</code></pre>
+<h2 id="db2-administration-server-command" tabindex="-1"><a class="anchor" href="#db2-administration-server-command" aria-hidden="true"><span class="octicon octicon-link"></span></a> DB2 Administration Server Command</h2>
+<pre><code># su - &lt;dasusr&gt;
+$ db2admin stop
+$ db2admin start
+</code></pre>
+<h2 id="configure-replication-monitor" tabindex="-1"><a class="anchor" href="#configure-replication-monitor" aria-hidden="true"><span class="octicon octicon-link"></span></a> Configure Replication Monitor</h2>
+<pre><code>asnpwd encrypt all
+asnpwd add alias &lt;Database&gt; id db2admin password xyxyxyxyxxyyx
+asnpwd add alias &lt;Database&gt; id db2admin password xyxyxyxyxxyyx
+</code></pre>
+<h2 id="database-size" tabindex="-1"><a class="anchor" href="#database-size" aria-hidden="true"><span class="octicon octicon-link"></span></a> Database size</h2>
+<pre><code>db2 "CALL GET_DBSIZE_INFO(?, ?, ?, 0)"
+</code></pre>
+<h2 id="restore-tablespace" tabindex="-1"><a class="anchor" href="#restore-tablespace" aria-hidden="true"><span class="octicon octicon-link"></span></a> Restore tablespace</h2>
+<pre><code>db2 update db cfg using LOGRETAIN ON
+db2stop force
+db2start
+db2 "restore db &lt;Database&gt; TABLESPACE (TS_REFERENCE) from /&lt;path_to_backup&gt; TAKEN AT 20071029094805"
+</code></pre>
+<h2 id="check-backup-restore-status" tabindex="-1"><a class="anchor" href="#check-backup-restore-status" aria-hidden="true"><span class="octicon octicon-link"></span></a> Check backup / restore status</h2>
+<pre><code>db2 list utilities show detail
+</code></pre>
+<h2 id="restore-progress" tabindex="-1"><a class="anchor" href="#restore-progress" aria-hidden="true"><span class="octicon octicon-link"></span></a> Restore progress</h2>
+<pre><code>db2 list utilities show detail
+db2 rollforward database &lt;Database&gt; query status
+</code></pre>
+<h2 id="show-information" tabindex="-1"><a class="anchor" href="#show-information" aria-hidden="true"><span class="octicon octicon-link"></span></a> Show information</h2>
+<pre><code>db2pd -db &lt;Database&gt;
+db2pd -db &lt;Database&gt; -tablespaces
+</code></pre>
+<h2 id="archive-db2log" tabindex="-1"><a class="anchor" href="#archive-db2log" aria-hidden="true"><span class="octicon octicon-link"></span></a> Archive db2log</h2>
+<pre><code>db2diag -A
+</code></pre>
+<h2 id="db2-backup-restore" tabindex="-1"><a class="anchor" href="#db2-backup-restore" aria-hidden="true"><span class="octicon octicon-link"></span></a> DB2 backup / restore</h2>
+<pre><code>db2 backup db &lt;Database&gt; online to /&lt;path_to_backup&gt; include logs
+db2 restore db &lt;Database&gt; from /&lt;path_to_backup&gt; TAKEN AT 20070126174124 INTO &lt;Database&gt; logtarget /&lt;path_to_backup&gt; REPLACE EXISTING
+db2 "rollforward db &lt;Database&gt; to end of logs and stop OVERFLOW LOG PATH (/&lt;path_to_backup&gt;)"
+db2 RESTORE DATABASE &lt;Database&gt; FROM /&lt;path_to_backup&gt; TAKEN AT 20070126171443 INTO &lt;Database&gt; REPLACE EXISTING WITHOUT ROLLING FORWARD
+db2 restore db &lt;Database&gt; from /&lt;path_to_backup&gt; taken at 20060724140400 into &lt;Database&gt; REPLACE EXISTING WITHOUT ROLLING FORWARD WITHOUT PROMPTING
+db2 restore db &lt;Database&gt; from /&lt;path_to_backup&gt; taken at 20060706143513 into &lt;Database&gt; WITHOUT PROMPTING
+db2 rollforward db &lt;Database&gt; to end of logs and complete
+</code></pre>
+<h2 id="remove-carriage-returns" tabindex="-1"><a class="anchor" href="#remove-carriage-returns" aria-hidden="true"><span class="octicon octicon-link"></span></a> Remove carriage returns</h2>
+<pre><code>replace(COP_MESSAGE,x'26','')
+</code></pre>
+<h2 id="date-transformation" tabindex="-1"><a class="anchor" href="#date-transformation" aria-hidden="true"><span class="octicon octicon-link"></span></a> Date transformation</h2>
+<pre><code>DATE(TRANSLATE('EF/GH/ABCD',substr(PRMYYYYMM,2)||'01','ABCDEFGH'))
+</code></pre>
+<h2 id="replication-force-a-full-refresh-by-resetting-the-lastsuccess-synchtime-and-synchpoint-values-in-subscription-set-table-to-null" tabindex="-1"><a class="anchor" href="#replication-force-a-full-refresh-by-resetting-the-lastsuccess-synchtime-and-synchpoint-values-in-subscription-set-table-to-null" aria-hidden="true"><span class="octicon octicon-link"></span></a> Replication. Force a full refresh by resetting the LASTSUCCESS, SYNCHTIME, and SYNCHPOINT values in subscription set table to null.</h2>
+<pre><code>-- on source database
+update ASN.IBMSNAP_PRUNCNTL
+set SYNCHTIME = null, SYNCHPOINT = null
+WHERE SOURCE_TABLE='&lt;Tablename&gt;'
+
+-- on target database
+UPDATE ASN.IBMSNAP_SUBS_SET
+SET LastSuccess = NULL,
+SynchPoint = NULL,
+SynchTime = NULL
+WHERE set_name = 'STY';
+</code></pre>
+<h2 id="find-tables-columns" tabindex="-1"><a class="anchor" href="#find-tables-columns" aria-hidden="true"><span class="octicon octicon-link"></span></a> Find table's columns</h2>
+<pre><code> SELECT C.TABSCHEMA, C.TABNAME,
+        C.COLNAME
+    FROM SYSCAT.TABLES AS T,
+         SYSCAT.COLUMNS AS C
+    WHERE T.TBSPACEID = n1
+    AND T.TABLEID = n2
+    AND C.COLNO = n3
+    AND C.TABSCHEMA = T.TABSCHEMA
+    AND C.TABNAME = T.TABNAME
+</code></pre>
+<h2 id="update-allocation-parameters-monitor" tabindex="-1"><a class="anchor" href="#update-allocation-parameters-monitor" aria-hidden="true"><span class="octicon octicon-link"></span></a> Update allocation parameters + monitor</h2>
+<pre><code>db2 update dbm cfg using DFT_MON_SORT off DFT_MON_STMT off DFT_MON_BUFPOOL off
+db2 update db cfg for &lt;Database&gt; using sortheap 1024
+</code></pre>
+<h2 id="get-db-config" tabindex="-1"><a class="anchor" href="#get-db-config" aria-hidden="true"><span class="octicon octicon-link"></span></a> Get DB config</h2>
+<pre><code>db2 get db cfg for &lt;Database&gt;
+</code></pre>
+<h2 id="update-log-file-size" tabindex="-1"><a class="anchor" href="#update-log-file-size" aria-hidden="true"><span class="octicon octicon-link"></span></a> Update log file size</h2>
+<pre><code>db2 update db cfg for &lt;Database&gt; USING LOGFILSIZ 40000
+db2 update db cfg for &lt;Database&gt; USING LOGSECOND 100
+</code></pre>
+<h2 id="check-status" tabindex="-1"><a class="anchor" href="#check-status" aria-hidden="true"><span class="octicon octicon-link"></span></a> Check status</h2>
+<pre><code>SYSCAT.TABLES (Columns STATUS: C -&gt; 'Check Pending')
+</code></pre>
+<h2 id="replication-trace" tabindex="-1"><a class="anchor" href="#replication-trace" aria-hidden="true"><span class="octicon octicon-link"></span></a> Replication trace</h2>
+<pre><code>tail /home/db2admin/utilogs/STUDY.TRC|grep -i UP1SYT
+</code></pre>
+<h2 id="checks-the-status-of-a-load-operation" tabindex="-1"><a class="anchor" href="#checks-the-status-of-a-load-operation" aria-hidden="true"><span class="octicon octicon-link"></span></a> Checks the status of a load operation</h2>
+<pre><code>db2 load query
+</code></pre>
+<h2 id="restart-database-force-kill-all-connections" tabindex="-1"><a class="anchor" href="#restart-database-force-kill-all-connections" aria-hidden="true"><span class="octicon octicon-link"></span></a> Restart database, force kill all connections!</h2>
+<pre><code>DEACTIVATE DATABASE database-alias
+</code></pre>
+<h2 id="list-user-defined-jars" tabindex="-1"><a class="anchor" href="#list-user-defined-jars" aria-hidden="true"><span class="octicon octicon-link"></span></a> List user defined Jars</h2>
+<pre><code>ls /home/db2admin/sqllib/function/jar/DB2ADMIN
+</code></pre>
+<h2 id="large-archive" tabindex="-1"><a class="anchor" href="#large-archive" aria-hidden="true"><span class="octicon octicon-link"></span></a> Large archive</h2>
+<pre><code>cat &lt;archive_name&gt;.001 | unix2dos | gzip -c &gt; backup.gz
+</code></pre>
+<h2 id="capture-erorrs" tabindex="-1"><a class="anchor" href="#capture-erorrs" aria-hidden="true"><span class="octicon octicon-link"></span></a> Capture erorrs</h2>
+<pre><code>db2 "select * from ASN.IBMSNAP_TRACE where TRACE_TIME &gt;'2004-04-13-11.00.00.000000' order by TRACE_TIME"
+</code></pre>
+<h2 id="start-jdbc-daemons" tabindex="-1"><a class="anchor" href="#start-jdbc-daemons" aria-hidden="true"><span class="octicon octicon-link"></span></a> Start JDBC daemons</h2>
+<pre><code>db2start
+db2jstrt
+db2jd &lt;Portnumber&gt;
+</code></pre>
+<h2 id="extend-tablespace" tabindex="-1"><a class="anchor" href="#extend-tablespace" aria-hidden="true"><span class="octicon octicon-link"></span></a> Extend tablespace</h2>
+<pre><code>db2 "alter TABLESPACE &lt;Name&gt; EXTEND (FILE '/&lt;path_to_file&gt;.dbm' 6G)"
+</code></pre>
+<h2 id="find-db2-processes" tabindex="-1"><a class="anchor" href="#find-db2-processes" aria-hidden="true"><span class="octicon octicon-link"></span></a> Find db2 processes</h2>
+<pre><code>ps -ef|grep db2|grep -v db2sysc|grep -v db2jd|grep -v bash
+</code></pre>
+<h2 id="get-backup-pending-databases" tabindex="-1"><a class="anchor" href="#get-backup-pending-databases" aria-hidden="true"><span class="octicon octicon-link"></span></a> Get backup pending databases</h2>
+<pre><code>db2 "get db cfg for &lt;Database&gt;" | grep -i "BACKUP PENDING"
+</code></pre>
+<h2 id="list-tablespaces" tabindex="-1"><a class="anchor" href="#list-tablespaces" aria-hidden="true"><span class="octicon octicon-link"></span></a> List tablespaces</h2>
+<pre><code>db2 list tablespaces show detail
+</code></pre>
+<h2 id="monitor-instances" tabindex="-1"><a class="anchor" href="#monitor-instances" aria-hidden="true"><span class="octicon octicon-link"></span></a> Monitor instances</h2>
+<pre><code>while (db2list) do sleep 10; date; done
+</code></pre>
+<h2 id="get-snapshot-for-application" tabindex="-1"><a class="anchor" href="#get-snapshot-for-application" aria-hidden="true"><span class="octicon octicon-link"></span></a> Get snapshot for application</h2>
+<pre><code>db2 "GET SNAPSHOT FOR APPLICATION AGENTID &lt;Nr&gt;"|grep "Rows updated"
+</code></pre>
+<h2 id="get-db2-diagnostic-log" tabindex="-1"><a class="anchor" href="#get-db2-diagnostic-log" aria-hidden="true"><span class="octicon octicon-link"></span></a> Get Db2 diagnostic log</h2>
+<pre><code>tail /home/db2admin/sqllib/db2dump/db2diag.log
+</code></pre>
+<h2 id="list-applications" tabindex="-1"><a class="anchor" href="#list-applications" aria-hidden="true"><span class="octicon octicon-link"></span></a> List applications</h2>
+<pre><code>db2 "list applications show detail"
+</code></pre>
+<h2 id="get-snapshot-for-application-1" tabindex="-1"><a class="anchor" href="#get-snapshot-for-application-1" aria-hidden="true"><span class="octicon octicon-link"></span></a> Get snapshot for application</h2>
+<pre><code>db2 "GET SNAPSHOT FOR APPLICATION AGENTID (Appl. Handle)"
+</code></pre>
+<h2 id="explain-plan-for-select-statement" tabindex="-1"><a class="anchor" href="#explain-plan-for-select-statement" aria-hidden="true"><span class="octicon octicon-link"></span></a> Explain plan for ...(select statement)</h2>
+<pre><code>db2exfmt -&gt; &lt;Database&gt;
+</code></pre>
+<h2 id="force-application" tabindex="-1"><a class="anchor" href="#force-application" aria-hidden="true"><span class="octicon octicon-link"></span></a> Force application</h2>
+<pre><code>db2 "force application (Appl. Handle)"
+</code></pre>
+<h2 id="generate-ddl" tabindex="-1"><a class="anchor" href="#generate-ddl" aria-hidden="true"><span class="octicon octicon-link"></span></a> Generate DDL</h2>
+<pre><code>db2look -d &lt;Database&gt; -e -l -x -f -a -o db2look.sql
+db2look -d &lt;Database&gt; -t &lt;Tablespace&gt; -o dap.txt -e
+db2look -d &lt;Database&gt; -o dap.txt -e
+</code></pre>
+<h2 id="list-tables" tabindex="-1"><a class="anchor" href="#list-tables" aria-hidden="true"><span class="octicon octicon-link"></span></a> List tables</h2>
+<pre><code>db2 "select tbspace,index_tbspace from sysibm.systables where lower(NAME) like '...'"
+</code></pre>
+<h2 id="list-indexes" tabindex="-1"><a class="anchor" href="#list-indexes" aria-hidden="true"><span class="octicon octicon-link"></span></a> List indexes</h2>
+<pre><code>db2 "select * from sysibm.sysindexes where lower(TBNAME) like '...'"
+</code></pre>
+<h2 id="invalid-inoperative-views" tabindex="-1"><a class="anchor" href="#invalid-inoperative-views" aria-hidden="true"><span class="octicon octicon-link"></span></a> Invalid / inoperative views:</h2>
+<pre><code>db2 "select name from sysibm.sysviews where valid='X'"
+select text||';' from sysibm.sysviews where valid='X';
+</code></pre>
+<h2 id="drop-database" tabindex="-1"><a class="anchor" href="#drop-database" aria-hidden="true"><span class="octicon octicon-link"></span></a> Drop database</h2>
+<pre><code>db2 connect reset
+db2 drop database &lt;Database&gt;
+</code></pre>
+<h2 id="parameter-commit" tabindex="-1"><a class="anchor" href="#parameter-commit" aria-hidden="true"><span class="octicon octicon-link"></span></a> parameter commit</h2>
+<pre><code>db2 parameter commit-
+</code></pre>
+<h2 id="export-import-data" tabindex="-1"><a class="anchor" href="#export-import-data" aria-hidden="true"><span class="octicon octicon-link"></span></a> Export / import data</h2>
+<pre><code>export to &lt;Filename&gt;.ixf of ixf select * from &lt;Tablename&gt;;
+load from &lt;Filename&gt;.ixf of ixf replace into &lt;Tablename&gt; nonrecoverable;
+</code></pre>
+<h2 id="scheduled-tasks-appear-as-running-in-the-scheduler-even-though-they-have-completed" tabindex="-1"><a class="anchor" href="#scheduled-tasks-appear-as-running-in-the-scheduler-even-though-they-have-completed" aria-hidden="true"><span class="octicon octicon-link"></span></a> Scheduled tasks appear as running in the Scheduler even though they have completed</h2>
+<p>When DAS is brought down while a scheduled task is running, the status of the task might stay in 'running' state even though the job has already finished or was aborted.</p>
+<p>Solution to remove the hanged 'running' tasks from the Scheduler:</p>
+<ol>
+<li>
+<p>Locate the 'running' record(s) by getting the corresponding task ID, which can be obtained from the Task Center.</p>
+</li>
+<li>
+<p>Stop the DAS.</p>
+</li>
+<li>
+<p>Run these commands:</p>
+<pre><code> db2 connect to TOOLSDB
+ db2 delete from SYSTOOLS.MDTASKEXECTY00 where taskID=&lt;Nr&gt;
+</code></pre>
+</li>
+<li>
+<p>Restart DAS and the Scheduler to check if the 'running' jobs are removed. If not, proceed to step 5.</p>
+</li>
+<li>
+<p>Make sure DAS is stopped again.</p>
+</li>
+<li>
+<p>Issue these commands:</p>
+<pre><code> db2 connect to TOOLSDB
+ db2 update SYSTOOLS.MDTASKTYPE00 set NUMBEROFEXECUTIONS00=0
+ db2 update SYSTOOLS.MDTASKTYPE00 set STATE00='0'
+</code></pre>
+</li>
+<li>
+<p>Restart DAS and the Scheduler. The 'running' tasks should be removed.</p>
+</li>
+</ol>
+
+		</main>
+	</body>
+</html>

@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+		<title>solaris</title>
+		<style>
+			/* PDF Specific */
+
+@media print {
+  body {
+    min-width: initial;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+}
+
+/* General */
+
+.octicon {
+  display: inline-block;
+  fill: currentColor;
+  vertical-align: text-bottom;
+}
+
+.anchor {
+  float: left;
+  line-height: 1;
+  margin-left: -20px;
+  padding-right: 4px;
+}
+
+.anchor:focus {
+  outline: none;
+}
+
+h1 .octicon-link,
+h2 .octicon-link,
+h3 .octicon-link,
+h4 .octicon-link,
+h5 .octicon-link,
+h6 .octicon-link {
+  color: #1b1f23;
+  vertical-align: middle;
+  visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+  text-decoration: none;
+}
+
+h1:hover .anchor .octicon-link,
+h2:hover .anchor .octicon-link,
+h3:hover .anchor .octicon-link,
+h4:hover .anchor .octicon-link,
+h5:hover .anchor .octicon-link,
+h6:hover .anchor .octicon-link {
+  visibility: visible;
+}
+
+h1:hover .anchor .octicon-link:before,
+h2:hover .anchor .octicon-link:before,
+h3:hover .anchor .octicon-link:before,
+h4:hover .anchor .octicon-link:before,
+h5:hover .anchor .octicon-link:before,
+h6:hover .anchor .octicon-link:before {
+  width: 16px;
+  height: 16px;
+  content: ' ';
+  display: inline-block;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' width='16' height='16' aria-hidden='true'%3E%3Cpath fill-rule='evenodd' d='M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+body {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-print-color-adjust: exact;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #24292e;
+  word-wrap: break-word;
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 1rem auto;
+}
+
+details {
+  display: block;
+}
+
+summary {
+  display: list-item;
+}
+
+a {
+  background-color: initial;
+}
+
+a:active,
+a:hover {
+  outline-width: 0;
+}
+
+strong {
+  font-weight: inherit;
+  font-weight: bolder;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+img {
+  border-style: none;
+}
+
+code,
+kbd,
+pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+hr {
+  box-sizing: initial;
+  height: 0;
+  overflow: visible;
+}
+
+input {
+  font: inherit;
+  margin: 0;
+}
+
+input {
+  overflow: visible;
+}
+
+[type='checkbox'] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+strong {
+  font-weight: 600;
+}
+
+hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #dfe2e5;
+}
+
+hr:after,
+hr:before {
+  display: table;
+  content: '';
+}
+
+hr:after {
+  clear: both;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+details summary {
+  cursor: pointer;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font: 11px SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  line-height: 10px;
+  color: #444d56;
+  vertical-align: middle;
+  background-color: #fafbfc;
+  border: 1px solid #d1d5da;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #d1d5da;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h1,
+h2 {
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+h3,
+h4 {
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h5,
+h6 {
+  font-weight: 600;
+}
+
+h6 {
+  font-size: 12px;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+blockquote {
+  margin: 0;
+}
+
+ol,
+ul {
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+ol ol,
+ul ol {
+  list-style-type: lower-roman;
+}
+
+ol ol ol,
+ol ul ol,
+ul ol ol,
+ul ul ol {
+  list-style-type: lower-alpha;
+}
+
+dd {
+  margin-left: 0;
+}
+
+code,
+pre {
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-size: 12px;
+}
+
+pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+:checked + .radio-label {
+  position: relative;
+  z-index: 1;
+  border-color: #0366d6;
+}
+
+.border {
+  border: 1px solid #e1e4e8 !important;
+}
+
+.border-0 {
+  border: 0 !important;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #e1e4e8 !important;
+}
+
+.rounded-1 {
+  border-radius: 3px !important;
+}
+
+.bg-white {
+  background-color: #fff !important;
+}
+
+.bg-gray-light {
+  background-color: #fafbfc !important;
+}
+
+.text-gray-light {
+  color: #6a737d !important;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.my-2 {
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+
+.pl-0 {
+  padding-left: 0 !important;
+}
+
+.py-0 {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.pl-1 {
+  padding-left: 4px !important;
+}
+
+.pl-2 {
+  padding-left: 8px !important;
+}
+
+.py-2 {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+.pl-3,
+.px-3 {
+  padding-left: 16px !important;
+}
+
+.px-3 {
+  padding-right: 16px !important;
+}
+
+.pl-4 {
+  padding-left: 24px !important;
+}
+
+.pl-5 {
+  padding-left: 32px !important;
+}
+
+.pl-6 {
+  padding-left: 40px !important;
+}
+
+.f6 {
+  font-size: 12px !important;
+}
+
+.lh-condensed {
+  line-height: 1.25 !important;
+}
+
+.text-bold {
+  font-weight: 600 !important;
+}
+
+.pl-c {
+  color: #6a737d;
+}
+
+.pl-c1,
+.pl-s .pl-v {
+  color: #005cc5;
+}
+
+.pl-e,
+.pl-en {
+  color: #6f42c1;
+}
+
+.pl-s .pl-s1,
+.pl-smi {
+  color: #24292e;
+}
+
+.pl-ent {
+  color: #22863a;
+}
+
+.pl-k {
+  color: #d73a49;
+}
+
+.pl-pds,
+.pl-s,
+.pl-s .pl-pse .pl-s1,
+.pl-sr,
+.pl-sr .pl-cce,
+.pl-sr .pl-sra,
+.pl-sr .pl-sre {
+  color: #032f62;
+}
+
+.pl-smw,
+.pl-v {
+  color: #e36209;
+}
+
+.pl-bu {
+  color: #b31d28;
+}
+
+.pl-ii {
+  color: #fafbfc;
+  background-color: #b31d28;
+}
+
+.pl-c2 {
+  color: #fafbfc;
+  background-color: #d73a49;
+}
+
+.pl-c2:before {
+  content: '^M';
+}
+
+.pl-sr .pl-cce {
+  font-weight: 700;
+  color: #22863a;
+}
+
+.pl-ml {
+  color: #735c0f;
+}
+
+.pl-mh,
+.pl-mh .pl-en,
+.pl-ms {
+  font-weight: 700;
+  color: #005cc5;
+}
+
+.pl-mi {
+  font-style: italic;
+  color: #24292e;
+}
+
+.pl-mb {
+  font-weight: 700;
+  color: #24292e;
+}
+
+.pl-md {
+  color: #b31d28;
+  background-color: #ffeef0;
+}
+
+.pl-mi1 {
+  color: #22863a;
+  background-color: #f0fff4;
+}
+
+.pl-mc {
+  color: #e36209;
+  background-color: #ffebda;
+}
+
+.pl-mi2 {
+  color: #f6f8fa;
+  background-color: #005cc5;
+}
+
+.pl-mdr {
+  font-weight: 700;
+  color: #6f42c1;
+}
+
+.pl-ba {
+  color: #586069;
+}
+
+.pl-sg {
+  color: #959da5;
+}
+
+.pl-corl {
+  text-decoration: underline;
+  color: #032f62;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.my-2 {
+  margin-bottom: 8px !important;
+}
+
+.my-2 {
+  margin-top: 8px !important;
+}
+
+.pl-0 {
+  padding-left: 0 !important;
+}
+
+.py-0 {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.pl-1 {
+  padding-left: 4px !important;
+}
+
+.pl-2 {
+  padding-left: 8px !important;
+}
+
+.py-2 {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+.pl-3 {
+  padding-left: 16px !important;
+}
+
+.pl-4 {
+  padding-left: 24px !important;
+}
+
+.pl-5 {
+  padding-left: 32px !important;
+}
+
+.pl-6 {
+  padding-left: 40px !important;
+}
+
+.pl-7 {
+  padding-left: 48px !important;
+}
+
+.pl-8 {
+  padding-left: 64px !important;
+}
+
+.pl-9 {
+  padding-left: 80px !important;
+}
+
+.pl-10 {
+  padding-left: 96px !important;
+}
+
+.pl-11 {
+  padding-left: 112px !important;
+}
+
+.pl-12 {
+  padding-left: 128px !important;
+}
+
+hr {
+  border-bottom-color: #eee;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font: 11px SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  line-height: 10px;
+  color: #444d56;
+  vertical-align: middle;
+  background-color: #fafbfc;
+  border: 1px solid #d1d5da;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #d1d5da;
+}
+
+body:after,
+body:before {
+  display: table;
+  content: '';
+}
+
+body:after {
+  clear: both;
+}
+
+body > :first-child {
+  margin-top: 0 !important;
+}
+
+body > :last-child {
+  margin-bottom: 0 !important;
+}
+
+a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+
+blockquote,
+details,
+dl,
+ol,
+p,
+pre,
+table,
+ul {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+hr {
+  height: 0.25em;
+  padding: 0;
+  margin: 24px 0;
+  background-color: #e1e4e8;
+  border: 0;
+}
+
+blockquote {
+  padding: 0 1em;
+  color: #6a737d;
+  border-left: 0.25em solid #dfe2e5;
+}
+
+blockquote > :first-child {
+  margin-top: 0;
+}
+
+blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h1,
+h2 {
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #eaecef;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.25em;
+}
+
+h4 {
+  font-size: 1em;
+}
+
+h5 {
+  font-size: 0.875em;
+}
+
+h6 {
+  font-size: 0.85em;
+  color: #6a737d;
+}
+
+ol,
+ul {
+  padding-left: 2em;
+}
+
+ol ol,
+ol ul,
+ul ol,
+ul ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+li {
+  word-wrap: break-all;
+}
+
+li > p {
+  margin-top: 16px;
+}
+
+li + li {
+  margin-top: 0.25em;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: 600;
+}
+
+dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+}
+
+table th {
+  font-weight: 600;
+}
+
+table td,
+table th {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+table tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+img {
+  max-width: 80%;
+  box-sizing: initial;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fff;
+}
+
+code {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(27, 31, 35, 0.05);
+  border-radius: 3px;
+}
+
+pre {
+  word-wrap: normal;
+}
+
+pre > code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #333;
+  -webkit-print-color-adjust: exact;
+  background: #f8f8f8;
+}
+
+.hljs pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.hljs pre,
+pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f6f8fa;
+  -webkit-print-color-adjust: exact;
+
+  border-radius: 3px;
+}
+
+pre code {
+  display: inline;
+  max-width: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: initial;
+  border: 0;
+}
+
+.commit-tease-sha {
+  display: inline-block;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-size: 90%;
+  color: #444d56;
+}
+
+.full-commit .btn-outline:not(:disabled):hover {
+  color: #005cc5;
+  border-color: #005cc5;
+}
+
+.blob-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.blob-wrapper-embedded {
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.blob-num {
+  width: 1%;
+  min-width: 50px;
+  padding-right: 10px;
+  padding-left: 10px;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-size: 12px;
+  line-height: 20px;
+  color: rgba(27, 31, 35, 0.3);
+  text-align: right;
+  white-space: nowrap;
+  vertical-align: top;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.blob-num:hover {
+  color: rgba(27, 31, 35, 0.6);
+}
+
+.blob-num:before {
+  content: attr(data-line-number);
+}
+
+.blob-code {
+  position: relative;
+  padding-right: 10px;
+  padding-left: 10px;
+  line-height: 20px;
+  vertical-align: top;
+}
+
+.blob-code-inner {
+  overflow: visible;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-size: 12px;
+  color: #24292e;
+  word-wrap: normal;
+  white-space: pre;
+}
+
+.pl-token.active,
+.pl-token:hover {
+  cursor: pointer;
+  background: #ffea7f;
+}
+
+.tab-size[data-tab-size='1'] {
+  -moz-tab-size: 1;
+  tab-size: 1;
+}
+
+.tab-size[data-tab-size='2'] {
+  -moz-tab-size: 2;
+  tab-size: 2;
+}
+
+.tab-size[data-tab-size='3'] {
+  -moz-tab-size: 3;
+  tab-size: 3;
+}
+
+.tab-size[data-tab-size='4'] {
+  -moz-tab-size: 4;
+  tab-size: 4;
+}
+
+.tab-size[data-tab-size='5'] {
+  -moz-tab-size: 5;
+  tab-size: 5;
+}
+
+.tab-size[data-tab-size='6'] {
+  -moz-tab-size: 6;
+  tab-size: 6;
+}
+
+.tab-size[data-tab-size='7'] {
+  -moz-tab-size: 7;
+  tab-size: 7;
+}
+
+.tab-size[data-tab-size='8'] {
+  -moz-tab-size: 8;
+  tab-size: 8;
+}
+
+.tab-size[data-tab-size='9'] {
+  -moz-tab-size: 9;
+  tab-size: 9;
+}
+
+.tab-size[data-tab-size='10'] {
+  -moz-tab-size: 10;
+  tab-size: 10;
+}
+
+.tab-size[data-tab-size='11'] {
+  -moz-tab-size: 11;
+  tab-size: 11;
+}
+
+.tab-size[data-tab-size='12'] {
+  -moz-tab-size: 12;
+  tab-size: 12;
+}
+
+.task-list-item {
+  list-style-type: none;
+}
+
+.task-list-item + .task-list-item {
+  margin-top: 3px;
+}
+
+.task-list-item input {
+  margin: 0 0.2em 0.25em -1.6em;
+  vertical-align: middle;
+}
+/*
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+*/
+  
+  .hljs-comment,
+  .hljs-quote {
+    color: #998;
+    font-style: italic;
+  }
+  
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-subst {
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .hljs-number,
+  .hljs-literal,
+  .hljs-variable,
+  .hljs-template-variable,
+  .hljs-tag .hljs-attr {
+    color: #008080;
+  }
+  
+  .hljs-string,
+  .hljs-doctag {
+    color: #d14;
+  }
+  
+  .hljs-title,
+  .hljs-section,
+  .hljs-selector-id {
+    color: #900;
+    font-weight: bold;
+  }
+  
+  .hljs-subst {
+    font-weight: normal;
+  }
+  
+  .hljs-type,
+  .hljs-class .hljs-title {
+    color: #458;
+    font-weight: bold;
+  }
+  
+  .hljs-tag,
+  .hljs-name,
+  .hljs-attribute {
+    color: #000080;
+    font-weight: normal;
+  }
+  
+  .hljs-regexp,
+  .hljs-link {
+    color: #009926;
+  }
+  
+  .hljs-symbol,
+  .hljs-bullet {
+    color: #990073;
+  }
+  
+  .hljs-built_in,
+  .hljs-builtin-name {
+    color: #0086b3;
+  }
+  
+  .hljs-meta {
+    color: #999;
+    font-weight: bold;
+  }
+  
+  .hljs-deletion {
+    background: #fdd;
+  }
+  
+  .hljs-addition {
+    background: #dfd;
+  }
+  
+  .hljs-emphasis {
+    font-style: italic;
+  }
+  
+  .hljs-strong {
+    font-weight: bold;
+  }
+		</style>
+	</head>
+	<body>
+		<nav id="table-of-contents">
+			
+		</nav>
+		<main>
+			<h1 id="sun-solaris-commands" tabindex="-1"><a class="anchor" href="#sun-solaris-commands" aria-hidden="true"><span class="octicon octicon-link"></span></a> Sun Solaris commands</h1>
+<h2 id="os-version" tabindex="-1"><a class="anchor" href="#os-version" aria-hidden="true"><span class="octicon octicon-link"></span></a> OS Version</h2>
+<pre><code>uname -a
+oslevel
+isainfo -v
+more /etc/release
+</code></pre>
+<h2 id="restart-sendmail" tabindex="-1"><a class="anchor" href="#restart-sendmail" aria-hidden="true"><span class="octicon octicon-link"></span></a> Restart sendmail</h2>
+<pre><code># /etc/init.d/sendmail stop
+# /etc/init.d/sendmail start
+</code></pre>
+<h2 id="nfs-client" tabindex="-1"><a class="anchor" href="#nfs-client" aria-hidden="true"><span class="octicon octicon-link"></span></a> NFS client</h2>
+<pre><code>showmount -e hostname
+mount points /etc/vfstab
+mountall -F nfs
+</code></pre>
+<h2 id="nfs-server" tabindex="-1"><a class="anchor" href="#nfs-server" aria-hidden="true"><span class="octicon octicon-link"></span></a> NFS Server</h2>
+<pre><code>shareall
+share points /etc/dfs/dfstab
+</code></pre>
+<h2 id="file-open-limits" tabindex="-1"><a class="anchor" href="#file-open-limits" aria-hidden="true"><span class="octicon octicon-link"></span></a> File open limits</h2>
+<pre><code>ulimit -n 4096
+</code></pre>
+<h2 id="replace-carriage-return-ctrl-v-m-and-others" tabindex="-1"><a class="anchor" href="#replace-carriage-return-ctrl-v-m-and-others" aria-hidden="true"><span class="octicon octicon-link"></span></a> Replace carriage return "Ctrl V M" and others</h2>
+<pre><code>tr -d '\r\032' &lt; $t.ux &gt; $t
+</code></pre>
+<h2 id="cpu-info" tabindex="-1"><a class="anchor" href="#cpu-info" aria-hidden="true"><span class="octicon octicon-link"></span></a> Cpu info</h2>
+<pre><code>usr/platform/sun4u/sbin/prtdiag -v
+/usr/sbin/psrinfo -v
+</code></pre>
+<h2 id="eeject-cdrom-if-device-busy" tabindex="-1"><a class="anchor" href="#eeject-cdrom-if-device-busy" aria-hidden="true"><span class="octicon octicon-link"></span></a> Eeject cdrom if device busy</h2>
+<pre><code># fuser -ck /cdrom 
+# fuser -ck /cdrom/cdrom0
+</code></pre>
+<h2 id="information-about-service-instances" tabindex="-1"><a class="anchor" href="#information-about-service-instances" aria-hidden="true"><span class="octicon octicon-link"></span></a> Information about service instances</h2>
+<pre><code># svcs -a|grep nfs
+</code></pre>
+<h2 id="show-disks-info" tabindex="-1"><a class="anchor" href="#show-disks-info" aria-hidden="true"><span class="octicon octicon-link"></span></a> Show disks / info</h2>
+<pre><code>/opt/SUNWsscs/sbin/sccli
+sccli&gt; show disk
+sccli&gt; show media-check
+sccli&gt; show redundancy
+</code></pre>
+<h2 id="disk-utilization-information" tabindex="-1"><a class="anchor" href="#disk-utilization-information" aria-hidden="true"><span class="octicon octicon-link"></span></a> Disk utilization information</h2>
+<pre><code>iostat -E
+</code></pre>
+<h2 id="display-the-number-of-used-and-free-i-nodes" tabindex="-1"><a class="anchor" href="#display-the-number-of-used-and-free-i-nodes" aria-hidden="true"><span class="octicon octicon-link"></span></a> Display the number of used and free i-nodes</h2>
+<pre><code>df -F ufs -o i
+</code></pre>
+<h2 id="display-processes-with-the-highest-cpu-utilization" tabindex="-1"><a class="anchor" href="#display-processes-with-the-highest-cpu-utilization" aria-hidden="true"><span class="octicon octicon-link"></span></a> Display processes with the highest CPU utilization</h2>
+<pre><code>ps -eo pid,pcpu,args | sort +1n
+</code></pre>
+<h2 id="display-processes-with-the-highest-memory-usage" tabindex="-1"><a class="anchor" href="#display-processes-with-the-highest-memory-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a> Display processes with the highest memory usage</h2>
+<pre><code>ps -eo pid,vsz,args | sort +1n
+</code></pre>
+<h2 id="printing-disk-geometry-and-partition-info" tabindex="-1"><a class="anchor" href="#printing-disk-geometry-and-partition-info" aria-hidden="true"><span class="octicon octicon-link"></span></a> Printing disk geometry and partition info</h2>
+<pre><code>prtvtoc /dev/rdsk/c0t0d0s0
+</code></pre>
+<h2 id="checking-whether-its-running-in-32-bit-mode-or-64-bit-mode" tabindex="-1"><a class="anchor" href="#checking-whether-its-running-in-32-bit-mode-or-64-bit-mode" aria-hidden="true"><span class="octicon octicon-link"></span></a> Checking whether it's running in 32-bit mode or 64-bit mode</h2>
+<pre><code>isalist -v
+</code></pre>
+<h2 id="verifying-a-route-to-a-specified-network" tabindex="-1"><a class="anchor" href="#verifying-a-route-to-a-specified-network" aria-hidden="true"><span class="octicon octicon-link"></span></a> Verifying a route to a specified network</h2>
+<pre><code># route -n get xxx.yyy.zzz.0
+</code></pre>
+<h2 id="print-the-version-of-obp" tabindex="-1"><a class="anchor" href="#print-the-version-of-obp" aria-hidden="true"><span class="octicon octicon-link"></span></a> Print the version of OBP</h2>
+<pre><code>prtconf -V
+</code></pre>
+<h2 id="print-the-version-of-open-windows" tabindex="-1"><a class="anchor" href="#print-the-version-of-open-windows" aria-hidden="true"><span class="octicon octicon-link"></span></a> Print the version of Open Windows</h2>
+<pre><code>showrev -w
+</code></pre>
+<h2 id="to-determine-which-monitor-resolution-is-available" tabindex="-1"><a class="anchor" href="#to-determine-which-monitor-resolution-is-available" aria-hidden="true"><span class="octicon octicon-link"></span></a> To determine which monitor resolution is available</h2>
+<pre><code>/usr/sbin/ffbconfig -res \?
+</code></pre>
+<h2 id="display-system-configuration" tabindex="-1"><a class="anchor" href="#display-system-configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a> Display system configuration</h2>
+<pre><code>/usr/platform/`uname -i`/sbin/prtdiag
+sysdef
+</code></pre>
+<h2 id="display-the-device-list-and-drivers-attached-to-devices" tabindex="-1"><a class="anchor" href="#display-the-device-list-and-drivers-attached-to-devices" aria-hidden="true"><span class="octicon octicon-link"></span></a> Display the device list (and drivers attached to devices)</h2>
+<pre><code>prtconf -D
+</code></pre>
+<h2 id="processor-type-speed" tabindex="-1"><a class="anchor" href="#processor-type-speed" aria-hidden="true"><span class="octicon octicon-link"></span></a> Processor type, speed</h2>
+<pre><code>psrinfo -v
+</code></pre>
+<h2 id="patch-applied-on-the-system" tabindex="-1"><a class="anchor" href="#patch-applied-on-the-system" aria-hidden="true"><span class="octicon octicon-link"></span></a> Patch applied on the system</h2>
+<pre><code>showrev -p
+</code></pre>
+<h2 id="exported-file-system-on-nfs-server" tabindex="-1"><a class="anchor" href="#exported-file-system-on-nfs-server" aria-hidden="true"><span class="octicon octicon-link"></span></a> Exported file system on NFS server</h2>
+<pre><code>showmount -e NFS_SERVER
+</code></pre>
+<h2 id="display-current-run-level" tabindex="-1"><a class="anchor" href="#display-current-run-level" aria-hidden="true"><span class="octicon octicon-link"></span></a> Display current run level</h2>
+<pre><code>who -r
+</code></pre>
+<h2 id="find-out-a-package-which-a-file-belongs-to" tabindex="-1"><a class="anchor" href="#find-out-a-package-which-a-file-belongs-to" aria-hidden="true"><span class="octicon octicon-link"></span></a> Find out a package which a file belongs to</h2>
+<pre><code>pkgchk -l -p /usr/lib/sendmail
+</code></pre>
+<h2 id="examining-gcc-behavior" tabindex="-1"><a class="anchor" href="#examining-gcc-behavior" aria-hidden="true"><span class="octicon octicon-link"></span></a> Examining gcc behavior</h2>
+<pre><code>gcc -v -x c /dev/null
+</code></pre>
+<h2 id="display-the-version-of-cde" tabindex="-1"><a class="anchor" href="#display-the-version-of-cde" aria-hidden="true"><span class="octicon octicon-link"></span></a> Display the version of CDE</h2>
+<pre><code>/usr/ccs/bin/what /usr/dt/bin/dtmail
+</code></pre>
+<h2 id="display-the-version-of-bind" tabindex="-1"><a class="anchor" href="#display-the-version-of-bind" aria-hidden="true"><span class="octicon octicon-link"></span></a> Display the version of BIND</h2>
+<pre><code>nslookup -class=chaos -q=txt version.bind ns0.optix.org
+</code></pre>
+<h2 id="shutdown-server" tabindex="-1"><a class="anchor" href="#shutdown-server" aria-hidden="true"><span class="octicon octicon-link"></span></a> Shutdown server</h2>
+<pre><code># umount /&lt;mountings&gt;
+# /opt/SUNWsscs/sscsconsole/sbin/sccli
+sccli&gt; selected device /dev/rdsk/&lt;device&gt;
+sccli&gt; shutdown controller
+sccli&gt; exit
+# init 0</code></pre>
+
+		</main>
+	</body>
+</html>
