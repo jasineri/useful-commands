@@ -1,1 +1,409 @@
-test
+<!DOCTYPE html>
+<h1>Useful commands</h1>
+<p>The most useful commands every advanced user needs to know.</p>
+<h1>AIX commands</h1>
+<h2>OS Version</h2>
+<pre><code>uname -a
+oslevel
+</code></pre>
+<h1>DB2 commands</h1>
+<h2>DB2 version</h2>
+<pre><code>db2level
+db2licm -l
+pkginfo -l db2cliv71
+</code></pre>
+<h2>Generate support request</h2>
+<pre><code>db2support . -g -s
+</code></pre>
+<h2>Verify the table pd for corruption:</h2>
+<pre><code>db2cat -d &lt;db&gt; -n &lt;table&gt; -s &lt;schema&gt; -o db2cat0.out
+</code></pre>
+<h2>Check Dependencies</h2>
+<pre><code>select constname from SYSCAT.REFERENCES where TABNAME like 'TABNAME%' or REFTABNAME like 'TABNAME%';
+select viewschema,viewname from SYSCAT.VIEWDEP where BSCHEMA like 'SCHEMANAME%' and BNAME like 'TABNAME%';
+select funcschema,funcname from SYSCAT.FUNCDEP where BSCHEMA like 'SCHEMANAME%' and BNAME like 'TABNAME%';
+select constname from SYSCAT.CHECKS where TABSCHEMA like 'SCHEMANAME%' and TABNAME like 'TABNAME%';
+select constname from SYSCAT.REFERENCES where TABSCHEMA like 'SCHEMANAME%' and TABNAME like 'TABNAME%';
+select trigschema,trigname from SYSCAT.TRIGDEP where BSCHEMA like 'SCHEMANAME%' and BNAME like 'TABNAME%';
+</code></pre>
+<h2>Lists entries in the history file:</h2>
+<pre><code>db2 list history DROPPED TABLE ALL for &lt;Database&gt;
+</code></pre>
+<h2>Lock table in exclusive mode</h2>
+<pre><code>LOCK TABLE "&lt;Table&gt;" IN EXCLUSIVE MODE
+</code></pre>
+<h2>Get DB2 task run history</h2>
+<pre><code>select * from "TOOLSCAT"."MDTHISTORYTY00"
+where START00 &gt; '2009-02-04 00:00:00.0000'
+and taskname00='&lt;Taskname&gt;'
+</code></pre>
+<h2>DB2 Administration Server Command</h2>
+<pre><code># su - &lt;dasusr&gt;
+$ db2admin stop
+$ db2admin start
+</code></pre>
+<h2>Configure Replication Monitor</h2>
+<pre><code>asnpwd encrypt all
+asnpwd add alias &lt;Database&gt; id db2admin password xyxyxyxyxxyyx
+asnpwd add alias &lt;Database&gt; id db2admin password xyxyxyxyxxyyx
+</code></pre>
+<h2>Database size</h2>
+<pre><code>db2 "CALL GET_DBSIZE_INFO(?, ?, ?, 0)"
+</code></pre>
+<h2>Restore tablespace</h2>
+<pre><code>db2 update db cfg using LOGRETAIN ON
+db2stop force
+db2start
+db2 "restore db &lt;Database&gt; TABLESPACE (TS_REFERENCE) from /&lt;path_to_backup&gt; TAKEN AT 20071029094805"
+</code></pre>
+<h2>Check backup / restore status</h2>
+<pre><code>db2 list utilities show detail
+</code></pre>
+<h2>Restore progress</h2>
+<pre><code>db2 list utilities show detail
+db2 rollforward database &lt;Database&gt; query status
+</code></pre>
+<h2>Show information</h2>
+<pre><code>db2pd -db &lt;Database&gt;
+db2pd -db &lt;Database&gt; -tablespaces
+</code></pre>
+<h2>Archive db2log</h2>
+<pre><code>db2diag -A
+</code></pre>
+<h2>DB2 backup / restore</h2>
+<pre><code>db2 backup db &lt;Database&gt; online to /&lt;path_to_backup&gt; include logs
+db2 restore db &lt;Database&gt; from /&lt;path_to_backup&gt; TAKEN AT 20070126174124 INTO &lt;Database&gt; logtarget /&lt;path_to_backup&gt; REPLACE EXISTING
+db2 "rollforward db &lt;Database&gt; to end of logs and stop OVERFLOW LOG PATH (/&lt;path_to_backup&gt;)"
+db2 RESTORE DATABASE &lt;Database&gt; FROM /&lt;path_to_backup&gt; TAKEN AT 20070126171443 INTO &lt;Database&gt; REPLACE EXISTING WITHOUT ROLLING FORWARD
+db2 restore db &lt;Database&gt; from /&lt;path_to_backup&gt; taken at 20060724140400 into &lt;Database&gt; REPLACE EXISTING WITHOUT ROLLING FORWARD WITHOUT PROMPTING
+db2 restore db &lt;Database&gt; from /&lt;path_to_backup&gt; taken at 20060706143513 into &lt;Database&gt; WITHOUT PROMPTING
+db2 rollforward db &lt;Database&gt; to end of logs and complete
+</code></pre>
+<h2>Remove carriage returns</h2>
+<pre><code>replace(COP_MESSAGE,x'26','')
+</code></pre>
+<h2>Date transformation</h2>
+<pre><code>DATE(TRANSLATE('EF/GH/ABCD',substr(PRMYYYYMM,2)||'01','ABCDEFGH'))
+</code></pre>
+<h2>Replication. Force a full refresh by resetting the LASTSUCCESS, SYNCHTIME, and SYNCHPOINT values in subscription set table to null.</h2>
+<pre><code>-- on source database
+update ASN.IBMSNAP_PRUNCNTL
+set SYNCHTIME = null, SYNCHPOINT = null
+WHERE SOURCE_TABLE='&lt;Tablename&gt;'
+
+-- on target database
+UPDATE ASN.IBMSNAP_SUBS_SET
+SET LastSuccess = NULL,
+SynchPoint = NULL,
+SynchTime = NULL
+WHERE set_name = 'STY';
+</code></pre>
+<h2>Find table's columns</h2>
+<pre><code> SELECT C.TABSCHEMA, C.TABNAME,
+        C.COLNAME
+    FROM SYSCAT.TABLES AS T,
+         SYSCAT.COLUMNS AS C
+    WHERE T.TBSPACEID = n1
+    AND T.TABLEID = n2
+    AND C.COLNO = n3
+    AND C.TABSCHEMA = T.TABSCHEMA
+    AND C.TABNAME = T.TABNAME
+</code></pre>
+<h2>Update allocation parameters + monitor</h2>
+<pre><code>db2 update dbm cfg using DFT_MON_SORT off DFT_MON_STMT off DFT_MON_BUFPOOL off
+db2 update db cfg for &lt;Database&gt; using sortheap 1024
+</code></pre>
+<h2>Get DB config</h2>
+<pre><code>db2 get db cfg for &lt;Database&gt;
+</code></pre>
+<h2>Update log file size</h2>
+<pre><code>db2 update db cfg for &lt;Database&gt; USING LOGFILSIZ 40000
+db2 update db cfg for &lt;Database&gt; USING LOGSECOND 100
+</code></pre>
+<h2>Check status</h2>
+<pre><code>SYSCAT.TABLES (Columns STATUS: C -&gt; 'Check Pending')
+</code></pre>
+<h2>Replication trace</h2>
+<pre><code>tail /home/db2admin/utilogs/STUDY.TRC|grep -i UP1SYT
+</code></pre>
+<h2>Checks the status of a load operation</h2>
+<pre><code>db2 load query
+</code></pre>
+<h2>Restart database, force kill all connections!</h2>
+<pre><code>DEACTIVATE DATABASE database-alias
+</code></pre>
+<h2>List user defined Jars</h2>
+<pre><code>ls /home/db2admin/sqllib/function/jar/DB2ADMIN
+</code></pre>
+<h2>Large archive</h2>
+<pre><code>cat &lt;archive_name&gt;.001 | unix2dos | gzip -c &gt; backup.gz
+</code></pre>
+<h2>Capture erorrs</h2>
+<pre><code>db2 "select * from ASN.IBMSNAP_TRACE where TRACE_TIME &gt;'2004-04-13-11.00.00.000000' order by TRACE_TIME"
+</code></pre>
+<h2>Start JDBC daemons</h2>
+<pre><code>db2start
+db2jstrt
+db2jd &lt;Portnumber&gt;
+</code></pre>
+<h2>Extend tablespace</h2>
+<pre><code>db2 "alter TABLESPACE &lt;Name&gt; EXTEND (FILE '/&lt;path_to_file&gt;.dbm' 6G)"
+</code></pre>
+<h2>Find db2 processes</h2>
+<pre><code>ps -ef|grep db2|grep -v db2sysc|grep -v db2jd|grep -v bash
+</code></pre>
+<h2>Get backup pending databases</h2>
+<pre><code>db2 "get db cfg for &lt;Database&gt;" | grep -i "BACKUP PENDING"
+</code></pre>
+<h2>List tablespaces</h2>
+<pre><code>db2 list tablespaces show detail
+</code></pre>
+<h2>Monitor instances</h2>
+<pre><code>while (db2list) do sleep 10; date; done
+</code></pre>
+<h2>Get snapshot for application</h2>
+<pre><code>db2 "GET SNAPSHOT FOR APPLICATION AGENTID &lt;Nr&gt;"|grep "Rows updated"
+</code></pre>
+<h2>Get Db2 diagnostic log</h2>
+<pre><code>tail /home/db2admin/sqllib/db2dump/db2diag.log
+</code></pre>
+<h2>List applications</h2>
+<pre><code>db2 "list applications show detail"
+</code></pre>
+<h2>Get snapshot for application</h2>
+<pre><code>db2 "GET SNAPSHOT FOR APPLICATION AGENTID (Appl. Handle)"
+</code></pre>
+<h2>Explain plan for ...(select statement)</h2>
+<pre><code>db2exfmt -&gt; &lt;Database&gt;
+</code></pre>
+<h2>Force application</h2>
+<pre><code>db2 "force application (Appl. Handle)"
+</code></pre>
+<h2>Generate DDL</h2>
+<pre><code>db2look -d &lt;Database&gt; -e -l -x -f -a -o db2look.sql
+db2look -d &lt;Database&gt; -t &lt;Tablespace&gt; -o dap.txt -e
+db2look -d &lt;Database&gt; -o dap.txt -e
+</code></pre>
+<h2>List tables</h2>
+<pre><code>db2 "select tbspace,index_tbspace from sysibm.systables where lower(NAME) like '...'"
+</code></pre>
+<h2>List indexes</h2>
+<pre><code>db2 "select * from sysibm.sysindexes where lower(TBNAME) like '...'"
+</code></pre>
+<h2>Invalid / inoperative views:</h2>
+<pre><code>db2 "select name from sysibm.sysviews where valid='X'"
+select text||';' from sysibm.sysviews where valid='X';
+</code></pre>
+<h2>Drop database</h2>
+<pre><code>db2 connect reset
+db2 drop database &lt;Database&gt;
+</code></pre>
+<h2>parameter commit</h2>
+<pre><code>db2 parameter commit-
+</code></pre>
+<h2>Export / import data</h2>
+<pre><code>export to &lt;Filename&gt;.ixf of ixf select * from &lt;Tablename&gt;;
+load from &lt;Filename&gt;.ixf of ixf replace into &lt;Tablename&gt; nonrecoverable;
+</code></pre>
+<h2>Scheduled tasks appear as running in the Scheduler even though they have completed</h2>
+<p>When DAS is brought down while a scheduled task is running, the status of the task might stay in 'running' state even though the job has already finished or was aborted.</p>
+<p>Solution to remove the hanged 'running' tasks from the Scheduler:</p>
+<ol>
+<li>
+<p>Locate the 'running' record(s) by getting the corresponding task ID, which can be obtained from the Task Center.</p>
+</li>
+<li>
+<p>Stop the DAS.</p>
+</li>
+<li>
+<p>Run these commands:</p>
+<pre><code>db2 connect to TOOLSDB
+db2 delete from SYSTOOLS.MDTASKEXECTY00 where taskID=&lt;Nr&gt;
+</code></pre>
+</li>
+<li>
+<p>Restart DAS and the Scheduler to check if the 'running' jobs are removed. If not, proceed to step 5.</p>
+</li>
+<li>
+<p>Make sure DAS is stopped again.</p>
+</li>
+<li>
+<p>Issue these commands:</p>
+<pre><code>db2 connect to TOOLSDB
+db2 update SYSTOOLS.MDTASKTYPE00 set NUMBEROFEXECUTIONS00=0
+db2 update SYSTOOLS.MDTASKTYPE00 set STATE00='0'
+</code></pre>
+</li>
+<li>
+<p>Restart DAS and the Scheduler. The 'running' tasks should be removed.</p>
+</li>
+</ol>
+<h1>Linux commands</h1>
+<h2>OS Version</h2>
+<pre><code>uname -srm
+cat /proc/version
+hostnamectl
+</code></pre>
+<h2>Make archive</h2>
+<pre><code>tar cvf - /etc /home | gzip &gt; test.tar.gz
+</code></pre>
+<h2>Extract archive</h2>
+<pre><code>gunzip &lt; test.tar.gz | tar xvf -
+</code></pre>
+<h2>Convert file's encoding</h2>
+<pre><code>iconv -f UTF-8 -t CP1252 &lt;in_file&gt; &gt; &lt;out_file&gt;
+</code></pre>
+<h2>Linux Performance Monitoring</h2>
+<pre><code>vmstat
+iostat
+</code></pre>
+<h2>Information about the Linux networking</h2>
+<pre><code>netstat -a -n
+</code></pre>
+<h2>Monitor processes</h2>
+<pre><code>top
+</code></pre>
+<h2>Use [] in grep to find a process and not include the grep command itself when you pipe ps -ef output to grep</h2>
+<pre><code>ps -ef | grep inet[d]
+</code></pre>
+<h2>Use the IFS shell variable to split a line into fields:</h2>
+<pre><code>grep root /etc/passwd | IFS=: read user x1 uid gid x2 home shell
+print $uid $home
+</code></pre>
+<h2>To send all output (stdout and stderr) generated by a command to the same file use</h2>
+<pre><code>command &gt;file 2&gt;&amp;1
+</code></pre>
+<h2>To send all output (stdout and stderr) generated by a command to a file and to the terminal (stdout) use</h2>
+<pre><code>command 2&gt;&amp;1 | tee file
+</code></pre>
+<h2>String Substitution Operators</h2>
+<p><code>${varname:-value}</code> Return value of varname if it exists and it is not null; otherwise return value.</p>
+<p><code>${varname:=value}</code> Return value of varname if it exists and it is not null; otherwise set varname to value and return value.</p>
+<p><code>${varname:?message}</code> Return value of varname if it exists and it is not null; otherwise print varname: message and abort current command or script. Default message is parameter null or not set.</p>
+<p><code>${varname:+value}</code> Return value, if varname exists and it is not null; otherwise return null.</p>
+<h2>Pattern-matching Operators</h2>
+<p><code>${varname#pattern}</code> If pattern matches the beginning of varname's value, delete the shortest part that mathes and return the rest.</p>
+<p><code>${varname##pattern}</code> If pattern matches the beginning of varname's value, delete the longest part that mathes and return the rest.</p>
+<p><code>${varname%pattern}</code> If pattern matches the end of varname's value, delete the shortest part that mathes and return the rest.</p>
+<p><code>${varname%%pattern}</code> If pattern matches the end of varname's value, delete the longest part that mathes and return the rest.</p>
+<h2>expr command</h2>
+<p><code>expr index string string2</code> to display the numerical position in <code>string</code> of first character in <code>string2</code> that matches.</p>
+<p><code>expr substr string position length</code> extracts <code>length</code> characters of substring from <code>string</code> starting at <code>position</code>.</p>
+<h1>Perl commands</h1>
+<h2>Find the "age" of a file</h2>
+<pre><code>perl -e '$mtime = (stat($ARGV[0]))[9];
+$age = ($mtime) ? time - $mtime : -1;
+print "$age\n";' file_name
+</code></pre>
+<h1>Sun Solaris commands</h1>
+<h2>OS Version</h2>
+<pre><code>uname -a
+oslevel
+isainfo -v
+more /etc/release
+</code></pre>
+<h2>Restart sendmail</h2>
+<pre><code># /etc/init.d/sendmail stop
+# /etc/init.d/sendmail start
+</code></pre>
+<h2>NFS client</h2>
+<pre><code>showmount -e hostname
+mount points /etc/vfstab
+mountall -F nfs
+</code></pre>
+<h2>NFS Server</h2>
+<pre><code>shareall
+share points /etc/dfs/dfstab
+</code></pre>
+<h2>File open limits</h2>
+<pre><code>ulimit -n 4096
+</code></pre>
+<h2>Replace carriage return "Ctrl V M" and others</h2>
+<pre><code>tr -d '\r\032' &lt; $t.ux &gt; $t
+</code></pre>
+<h2>Cpu info</h2>
+<pre><code>usr/platform/sun4u/sbin/prtdiag -v
+/usr/sbin/psrinfo -v
+</code></pre>
+<h2>Eeject cdrom if device busy</h2>
+<pre><code># fuser -ck /cdrom 
+# fuser -ck /cdrom/cdrom0
+</code></pre>
+<h2>Information about service instances</h2>
+<pre><code># svcs -a|grep nfs
+</code></pre>
+<h2>Show disks / info</h2>
+<pre><code>/opt/SUNWsscs/sbin/sccli
+sccli&gt; show disk
+sccli&gt; show media-check
+sccli&gt; show redundancy
+</code></pre>
+<h2>Disk utilization information</h2>
+<pre><code>iostat -E
+</code></pre>
+<h2>Display the number of used and free i-nodes</h2>
+<pre><code>df -F ufs -o i
+</code></pre>
+<h2>Display processes with the highest CPU utilization</h2>
+<pre><code>ps -eo pid,pcpu,args | sort +1n
+</code></pre>
+<h2>Display processes with the highest memory usage</h2>
+<pre><code>ps -eo pid,vsz,args | sort +1n
+</code></pre>
+<h2>Printing disk geometry and partition info</h2>
+<pre><code>prtvtoc /dev/rdsk/c0t0d0s0
+</code></pre>
+<h2>Checking whether it's running in 32-bit mode or 64-bit mode</h2>
+<pre><code>isalist -v
+</code></pre>
+<h2>Verifying a route to a specified network</h2>
+<pre><code># route -n get xxx.yyy.zzz.0
+</code></pre>
+<h2>Print the version of OBP</h2>
+<pre><code>prtconf -V
+</code></pre>
+<h2>Print the version of Open Windows</h2>
+<pre><code>showrev -w
+</code></pre>
+<h2>To determine which monitor resolution is available</h2>
+<pre><code>/usr/sbin/ffbconfig -res \?
+</code></pre>
+<h2>Display system configuration</h2>
+<pre><code>/usr/platform/`uname -i`/sbin/prtdiag
+sysdef
+</code></pre>
+<h2>Display the device list (and drivers attached to devices)</h2>
+<pre><code>prtconf -D
+</code></pre>
+<h2>Processor type, speed</h2>
+<pre><code>psrinfo -v
+</code></pre>
+<h2>Patch applied on the system</h2>
+<pre><code>showrev -p
+</code></pre>
+<h2>Exported file system on NFS server</h2>
+<pre><code>showmount -e NFS_SERVER
+</code></pre>
+<h2>Display current run level</h2>
+<pre><code>who -r
+</code></pre>
+<h2>Find out a package which a file belongs to</h2>
+<pre><code>pkgchk -l -p /usr/lib/sendmail
+</code></pre>
+<h2>Examining gcc behavior</h2>
+<pre><code>gcc -v -x c /dev/null
+</code></pre>
+<h2>Display the version of CDE</h2>
+<pre><code>/usr/ccs/bin/what /usr/dt/bin/dtmail
+</code></pre>
+<h2>Display the version of BIND</h2>
+<pre><code>nslookup -class=chaos -q=txt version.bind ns0.optix.org
+</code></pre>
+<h2>Shutdown server</h2>
+<pre><code># umount /&lt;mountings&gt;
+# /opt/SUNWsscs/sscsconsole/sbin/sccli
+sccli&gt; selected device /dev/rdsk/&lt;device&gt;
+sccli&gt; shutdown controller
+sccli&gt; exit
+# init 0
+</code></pre>
