@@ -20,8 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Make HTML from Markdown
-        uses: baileyjm02/markdown-to-pdf@v1
+      #- name: Make HTML from Markdown
+      - uses: baileyjm02/markdown-to-pdf@v1
         with:
           input_dir: .
           output_dir: html
