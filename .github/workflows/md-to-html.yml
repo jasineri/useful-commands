@@ -19,12 +19,10 @@ jobs:
     name: Build HTML
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: baileyjm02/markdown-to-pdf@v1
+      - uses: ZacJW/markdown-html-action@1.1.0
         with:
-          input_dir: .
-          output_dir: html
-      - uses: actions/upload-artifact@v1
-        with:
-          name: html
-          path: html
+          input_files: '["*.md"]'
+          output_files: '["html/test.html"]'
+          builtin_stylesheet: 'style.css'
+          packages: 'pymdown-extensions'
+          extensions: '["pymdownx.extra"]'
