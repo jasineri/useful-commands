@@ -19,6 +19,8 @@ jobs:
     name: Build HTML
     runs-on: ubuntu-latest
     steps:
+      # Checks repo under $GITHUB_WORKSHOP, so your job can access it
+      - uses: actions/checkout@v2
       - uses: ZacJW/markdown-html-action@1.1.0
         with:
           input_files: '[["*.md"]]'
