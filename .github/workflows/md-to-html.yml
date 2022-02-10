@@ -21,7 +21,10 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - run: echo "test" > html/test.html
+      - uses: baileyjm02/markdown-to-pdf@v1
+        with:
+          input_dir: .
+          output_dir: html
 
       - name: Update resources
         uses: test-room-7/action-update-file@v1
