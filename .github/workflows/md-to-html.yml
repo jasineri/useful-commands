@@ -26,11 +26,11 @@ jobs:
         uses: baileyjm02/markdown-to-pdf@v1
         with:
           input_dir: .
-          output_dir: html
+          output_dir: docs
 
       - name: Update resources
         uses: test-room-7/action-update-file@v1
         with:
-          file-path: html/*.html
+          file-path: docs/*.html
           commit-msg: Update html
           github-token: ${{ secrets.GITHUB_TOKEN }}
