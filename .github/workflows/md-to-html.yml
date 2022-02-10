@@ -32,6 +32,8 @@ jobs:
           
       - run: git status    
       
+      - run: git add test.html
+      
       # Push the changes
       - name: Push changes
         uses: ad-m/github-push-action@master
