@@ -21,19 +21,11 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - uses: actions/setup-node@v1
-
-      - uses: ZacJW/markdown-html-action@1.1.0
-        with:
-          input_files: '[["*.md"]]'
-          output_files: '["test.html"]'
-          #builtin_stylesheet: 'style.css'
-          packages: 'pymdown-extensions'
-          extensions: '["pymdownx.extra"]'
+      - run: echo "test" > html/test.html
 
       - name: Update resources
         uses: test-room-7/action-update-file@v1
         with:
-          file-path: test.html
+          file-path: html/*.html
           commit-msg: Update resources
           github-token: ${{ secrets.GITHUB_TOKEN }}
