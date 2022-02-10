@@ -22,7 +22,7 @@ jobs:
       - uses: ZacJW/markdown-html-action@1.1.0
         with:
           input_files: '[["*.md"]]'
-          output_files: '["html/test.html"]'
+          output_files: '["test.html"]'
           #builtin_stylesheet: 'style.css'
           packages: 'pymdown-extensions'
           extensions: '["pymdownx.extra"]'
