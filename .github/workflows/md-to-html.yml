@@ -23,6 +23,6 @@ jobs:
         with:
           input_files: '[["*.md"]]'
           output_files: '["html/test.html"]'
-          builtin_stylesheet: 'style.css'
+          #builtin_stylesheet: 'style.css'
           packages: 'pymdown-extensions'
           extensions: '["pymdownx.extra"]'
