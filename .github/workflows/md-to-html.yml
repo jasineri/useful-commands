@@ -19,16 +19,16 @@ jobs:
     name: Build HTML
     runs-on: ubuntu-latest
     steps:
-      -
-      - name: Make HTML from Markdown
-          uses: baileyjm02/markdown-to-pdf@v1
-          with:
-            input_dir: .
-            output_dir: html
 
-              - name: Update resources
-                uses: test-room-7/action-update-file@v1
-                with:
-                  file-path: html/*.html
-                  commit-msg: Update resources
-                  github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Make HTML from Markdown
+        uses: baileyjm02/markdown-to-pdf@v1
+        with:
+          input_dir: .
+          output_dir: html
+
+      - name: Update resources
+        uses: test-room-7/action-update-file@v1
+        with:
+          file-path: html/*.html
+          commit-msg: Update resources
+          github-token: ${{ secrets.GITHUB_TOKEN }}
