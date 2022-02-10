@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: ZacJW/markdown-html-action@1.1.0
         with:
-          input_files: '["*.md"]'
+          input_files: '[["*.md"]]'
           output_files: '["html/test.html"]'
           builtin_stylesheet: 'style.css'
           packages: 'pymdown-extensions'
