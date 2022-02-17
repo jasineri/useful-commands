@@ -31,5 +31,5 @@ jobs:
       - name: Push changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          file_pattern: ./*.html
+          file_pattern: docs/*.html
           commit_message: Update html
