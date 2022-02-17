@@ -28,9 +28,8 @@ jobs:
           input_dir: .
           output_dir: docs
 
-      - name: Update resources
-        uses: test-room-7/action-update-file@v1
+      - name: Push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          file-path: docs/*.html
-          commit-msg: Update html
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          file_pattern: ./*.html
+          commit_message: Update html
