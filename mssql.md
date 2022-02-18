@@ -7,7 +7,8 @@
        c.name                   AS column_name,
        Type_name(user_type_id)  AS data_type,
        c.max_length,
-       c.precision
+       c.precision,
+       c.is_nullable
     FROM   sys.columns c
        JOIN sys.views v
          ON v.object_id = c.object_id
