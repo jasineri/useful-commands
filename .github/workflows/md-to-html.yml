@@ -29,7 +29,6 @@ jobs:
           output_dir: docs
 
       - name: Push changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: jasineri/simple-push-action@v1
         with:
           file_pattern: docs/*.html
-          commit_message: Update html
