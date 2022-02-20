@@ -47,13 +47,13 @@
 `${varname:+value}` Return value, if varname exists and it is not null; otherwise return null.
 
 ## Pattern-matching Operators
-`${varname#pattern}` If pattern matches the beginning of varname's value, delete the shortest part that mathes and return the rest.
+`${varname#pattern}` If pattern matches the beginning of varname's value, delete the shortest part that matches and return the rest.
 
-`${varname##pattern}` If pattern matches the beginning of varname's value, delete the longest part that mathes and return the rest.
+`${varname##pattern}` If pattern matches the beginning of varname's value, delete the longest part that matches and return the rest.
 
-`${varname%pattern}` If pattern matches the end of varname's value, delete the shortest part that mathes and return the rest.
+`${varname%pattern}` If pattern matches the end of varname's value, delete the shortest part that matches and return the rest.
 
-`${varname%%pattern}` If pattern matches the end of varname's value, delete the longest part that mathes and return the rest.
+`${varname%%pattern}` If pattern matches the end of varname's value, delete the longest part that matches and return the rest.
 
 ## expr command
 `expr index string string2` to display the numerical position in `string` of first character in `string2` that matches.
