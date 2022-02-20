@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout md
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
       - name: Make HTML from Markdown
         uses: baileyjm02/markdown-to-pdf@v1
@@ -29,7 +29,6 @@ jobs:
           output_dir: docs
 
       - name: Push changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: jasineri/simple-push-action@v1
         with:
           file_pattern: docs/*.html
-          commit_message: Update html
