@@ -1150,10 +1150,10 @@ print $uid $home
 <p><code>${varname:?message}</code> Return value of varname if it exists and it is not null; otherwise print varname: message and abort current command or script. Default message is parameter null or not set.</p>
 <p><code>${varname:+value}</code> Return value, if varname exists and it is not null; otherwise return null.</p>
 <h2 id="pattern-matching-operators" tabindex="-1"><a class="anchor" href="#pattern-matching-operators" aria-hidden="true"><span class="octicon octicon-link"></span></a> Pattern-matching Operators</h2>
-<p><code>${varname#pattern}</code> If pattern matches the beginning of varname's value, delete the shortest part that mathes and return the rest.</p>
-<p><code>${varname##pattern}</code> If pattern matches the beginning of varname's value, delete the longest part that mathes and return the rest.</p>
-<p><code>${varname%pattern}</code> If pattern matches the end of varname's value, delete the shortest part that mathes and return the rest.</p>
-<p><code>${varname%%pattern}</code> If pattern matches the end of varname's value, delete the longest part that mathes and return the rest.</p>
+<p><code>${varname#pattern}</code> If pattern matches the beginning of varname's value, delete the shortest part that matches and return the rest.</p>
+<p><code>${varname##pattern}</code> If pattern matches the beginning of varname's value, delete the longest part that matches and return the rest.</p>
+<p><code>${varname%pattern}</code> If pattern matches the end of varname's value, delete the shortest part that matches and return the rest.</p>
+<p><code>${varname%%pattern}</code> If pattern matches the end of varname's value, delete the longest part that matches and return the rest.</p>
 <h2 id="expr-command" tabindex="-1"><a class="anchor" href="#expr-command" aria-hidden="true"><span class="octicon octicon-link"></span></a> expr command</h2>
 <p><code>expr index string string2</code> to display the numerical position in <code>string</code> of first character in <code>string2</code> that matches.</p>
 <p><code>expr substr string position length</code> extracts <code>length</code> characters of substring from <code>string</code> starting at <code>position</code>.</p>
