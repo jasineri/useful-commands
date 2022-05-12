@@ -16,3 +16,6 @@
     ORDER  BY schema_name,
           view_name,
           column_id; 
+
+## List sessions / active connections
+    exec sp_who2
